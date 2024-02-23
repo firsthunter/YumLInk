@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="481.0" prefWidth="1073.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.beta.Controller.UsernutritionPage">
+   <Label layoutX="55.0" layoutY="94.0" text="Age" textFill="#959895">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </Label>
+   <Label layoutX="60.0" layoutY="150.0" prefHeight="25.0" prefWidth="39.0" text="Taille" textFill="#959895">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Label>
+   <TextField fx:id="tf_age" layoutX="36.0" layoutY="118.0" promptText="Votre age" style="-fx-border-radius: 24px; -fx-border-color: EA6A12; -fx-background-color: fff;" />
+   <TextField fx:id="tf_taille" layoutX="36.0" layoutY="174.0" promptText="Votre taille" style="-fx-border-radius: 24px; -fx-border-color: EA6A12; -fx-background-color: fff;" />
+   <TextField fx:id="tf_poids" layoutX="210.0" layoutY="118.0" promptText="Votre poids" style="-fx-border-radius: 24px; -fx-border-color: EA6A12; -fx-background-color: fff;" />
+   <Label layoutX="228.0" layoutY="92.0" text="Poids" textFill="#959895">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Label>
+   <Label layoutX="216.0" layoutY="150.0" text="Niveau d' Activite " textFill="#959895">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Label>
+   <Button fx:id="ajouter_info" layoutX="167.0" layoutY="310.0" mnemonicParsing="false" onAction="#ajouter_user_info" style="-fx-border-radius: 44; -fx-border-style: 1; -fx-background-color: EA6A12;" text="Submit" textFill="WHITE" />
+   <Label fx:id="label_calorie" layoutX="401.0" layoutY="87.0" style="-fx-border-radius: 8; -fx-background-color: EA6A12; -fx-content-display: flex; -fx-min-width: 80; -fx-min-height: 207; -fx-graphic-text-gap: 8;" text="NNN" />
+   <Label layoutX="564.0" layoutY="44.0" text="Conseille" />
+   <Label layoutX="420.0" layoutY="312.0" text="Calories" />
+   <Label layoutX="520.0" layoutY="315.0" text="Proteins" />
+   <Label layoutX="622.0" layoutY="315.0" text="Fats" />
+   <Label layoutX="708.0" layoutY="312.0" text="Carbs" />
+   <Label layoutX="863.0" layoutY="26.0" prefHeight="18.0" prefWidth="82.0" text="Suggestion" />
+   <RadioButton fx:id="actif" layoutX="213.0" layoutY="179.0" mnemonicParsing="false" text="Actif" />
+   <RadioButton fx:id="lazy" layoutX="297.0" layoutY="179.0" mnemonicParsing="false" text="lazy" />
+   <Label fx:id="label_protein" layoutX="497.0" layoutY="87.0" style="-fx-border-radius: 8; -fx-background-color: EA6A12; -fx-content-display: flex; -fx-min-width: 80; -fx-min-height: 207; -fx-graphic-text-gap: 8;" text="NNN" />
+   <Label fx:id="label_fats" layoutX="591.0" layoutY="88.0" style="-fx-border-radius: 8; -fx-background-color: EA6A12; -fx-content-display: flex; -fx-min-width: 80; -fx-min-height: 207; -fx-graphic-text-gap: 8;" text="NNN" textAlignment="CENTER" />
+   <Label fx:id="label_carbs" layoutX="684.0" layoutY="88.0" style="-fx-border-radius: 8; -fx-background-color: EA6A12; -fx-content-display: flex; -fx-min-width: 80; -fx-min-height: 207; -fx-graphic-text-gap: 8;" text="NNN" />
+   <Button fx:id="supprimer_info" layoutX="159.0" layoutY="342.0" mnemonicParsing="false" onAction="#supprimer_donnee_user" style="-fx-border-radius: 44; -fx-border-style: 1; -fx-background-color: EA6A12;" text="Supprimer" textFill="WHITE" />
+   <RadioButton fx:id="Homme" layoutX="115.0" layoutY="241.0" mnemonicParsing="false" text="Homme" />
+   <RadioButton fx:id="Femme" layoutX="198.0" layoutY="241.0" mnemonicParsing="false" text="Femme" />
+   <Label layoutX="40.0" layoutY="237.0" prefHeight="25.0" prefWidth="54.0" text="Gender" textFill="#959895">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Label>
+   <ListView fx:id="listview" layoutX="788.0" layoutY="53.0" prefHeight="447.0" prefWidth="232.0" />
+   <Button fx:id="update_info" layoutX="159.0" layoutY="376.0" mnemonicParsing="false" onAction="#update_donnee_user" prefHeight="25.0" prefWidth="72.0" style="-fx-border-radius: 44; -fx-border-style: 1; -fx-background-color: EA6A12;" text="Update" textFill="WHITE" />
+   <Button fx:id="affiche_info" layoutX="160.0" layoutY="412.0" mnemonicParsing="false" onAction="#Affiche_donnee_user" prefHeight="25.0" prefWidth="72.0" style="-fx-border-radius: 44; -fx-border-style: 1; -fx-background-color: EA6A12;" text="Afficher" textFill="WHITE" />
+</AnchorPane>

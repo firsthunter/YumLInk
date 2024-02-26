@@ -131,41 +131,11 @@ public class UsernutritionPage {
     @FXML
    void update_donnee_user(ActionEvent event) {
        int userId =1;
-        try {
-           UserNutrition un = new UserNutrition_Service().getUserNutrition(userId);
-        if (un != null) {
-            tf_age.setText(String.valueOf(un.getAge()));
-            tf_poids.setText(String.valueOf(un.getWeight()));
-            tf_taille.setText(String.valueOf(un.getHeight()));
-            // Select the appropriate radio button based on the activity level
-            switch (un.getActivityLevel()) {
-                case "Active":
-                    actif.setSelected(true);
-                    break;
-                case "Lazy":
-                    lazy.setSelected(true);
-                    break;
-            }
-            // Select the appropriate radio button based on the gender
-            switch (un.getGender()) {
-                case "Homme":
-                    Homme.setSelected(true);
-                    break;
-                case "Femme":
-                    Femme.setSelected(true);
-                    break;
-            }
-            //the previous values are displayed in the labels
-            int age = un.getAge();
-            double weight = un.getWeight();
-            double height = un.getHeight();
-            String activityLevel = un.getActivityLevel();
-            String gender = un.getGender();
-
 
             // Retrieve changed values from the text fields and radio buttons
             int newAge = Integer.parseInt(tf_age.getText());
             double newWeight = Double.parseDouble(tf_poids.getText());
+            System.out.println(newAge);
             double newHeight = Double.parseDouble(tf_taille.getText());
             String newActivityLevel = actif.isSelected() ? "Active" : "Lazy";
             String newGender = Femme.isSelected() ? "Femme" : "Homme";
@@ -183,16 +153,7 @@ public class UsernutritionPage {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("User nutrition data updated successfully.");
             alert.show();
-        } else {
-            System.out.println("User nutrition data not found for ID: " + userId);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("No user nutrition data found.");
-            alert.show();
-                    }
-        } catch (Exception e) {
-        e.printStackTrace();
-         }
-    }
+        }
     @FXML
     void Affiche_donnee_user(ActionEvent event) {
         int userId = 1; // Replace this with the actual user ID

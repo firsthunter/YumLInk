@@ -67,7 +67,6 @@ public class UserNutrition_Service implements iService<UserNutrition> {
 
         double weight = userNutrition.getWeight();
         double height = userNutrition.getHeight();
-        System.out.println(weight+"/"+height);
         String activityLevel = userNutrition.getActivityLevel();
         System.out.println(userNutrition);
         // Calculate calorie, protein, carbs, and fats based on user info

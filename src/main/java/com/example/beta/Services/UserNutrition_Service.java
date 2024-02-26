@@ -162,17 +162,15 @@ public class UserNutrition_Service implements iService<UserNutrition> {
                 double height = resultSet.getDouble("height");
                 String activityLevel = resultSet.getString("activity_level");
                 String gender = resultSet.getString("gender");
-                int calories = resultSet.getInt("calorie");
-                int protein = resultSet.getInt("protein");
-                int fat = resultSet.getInt("fat");
-                int carbs = resultSet.getInt("carbs");
-                UserNutrition un = new UserNutrition(age, weight, height, activityLevel, gender, calories, protein, fat, carbs);
-                return un ;
+                UserNutrition un = new UserNutrition(age, weight, height, activityLevel, gender);
+                return un;
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null;
-    }
+
+        return null ;
+}
 
 }

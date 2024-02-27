@@ -3,6 +3,7 @@ package org.example;
 import entities.Défis;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -38,9 +39,9 @@ public class Update {
     @FXML
     private Button UpdateB;
     private Défis défis;
-    private Afficher afficher;
+    private AfficherDefis afficher;
     private String imageP ="";
-    public void initData(Défis défis, Afficher afficher) {
+    public void initData(Défis défis, AfficherDefis afficher) {
         this.défis = défis;
         this.afficher = afficher;
         populateFields();
@@ -87,6 +88,15 @@ public class Update {
 
     @FXML
     void Update(ActionEvent event) {
+        if (NomU.getText().isEmpty() || DisU.getText().isEmpty() || DateU.getText() == null || HeureU.getText() == null || imageP.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Veuillez remplir tous les champs et sélectionner une image, puis entrer la date " +
+                    "au format AAAA-MM-JJ et l'heure au format HH:mm:ss.");
+            alert.show();
+            return; // Exit method if any field is empty
+        }
+
+
         if (défis != null) {
             try {
                 if(!imageP.isEmpty()) {
@@ -110,7 +120,7 @@ public class Update {
                 }
                 Stage stage=(Stage)UpdateB.getScene().getWindow();
                 stage.close();
-                // Refresh the view in the Afficher controller
+
                 afficher.refreshView();
 
 

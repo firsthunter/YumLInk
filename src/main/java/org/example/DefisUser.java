@@ -35,12 +35,12 @@ public class DefisUser {
                 col++;
                 // Load item.fxml for each Défis and set its data
                 FXMLLoader Loader;
-                Loader = new FXMLLoader(getClass().getResource("/challU.fxml"));
+                Loader = new FXMLLoader(getClass().getResource("/DefisCardUser.fxml"));
                 Parent interfaceRoot = Loader.load();
-                ChallU itemController = Loader.getController();
+                DefisCardUser itemController = Loader.getController();
                 itemController.setDataU(défis);
-             //   itemController.setD(défis);
-              //  itemController.setRefresh(this);
+                itemController.setd(défis);
+//                itemController.setRefresh(this);
 
                 // Add the loaded item to the GridPane
                 GridU.add(interfaceRoot, col, row);

@@ -17,8 +17,9 @@ import services.DéfisS;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 
-public class defiscontr {
+public class DefisChef {
     @FXML
     private DatePicker date;
 
@@ -37,14 +38,39 @@ public class defiscontr {
     @FXML
     private ImageView pho;
     public String imagePath = "";
-    private Afficher afficher;
+    private AfficherDefis afficher;
 
-    public void setAfficher(Afficher afficher) {
+    public void setAfficher(AfficherDefis afficher) {
         this.afficher = afficher;
     }
 
     @FXML
     public void ajouter(javafx.event.ActionEvent actionEvent) {
+        if (name.getText().isEmpty() || description.getText().isEmpty() || date.getValue() == null || heure.getLocalTime() == null || imagePath.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Veuillez remplir tous les champs et sélectionner une image.");
+            alert.show();
+            return; // Exit method if any field is empty
+        }
+        // Check if the date format is yyyy-MM-dd
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String formattedDate = date.getValue().format(dateFormatter);
+        if (!date.toString().equals(formattedDate)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Veuillez entrer l'heure au format  yyyy-MM-dd.");
+            alert.show();
+            return; // Exit method if date format is incorrect
+        }
+
+        // Check if the time format is HH:mm:ss
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String formattedTime = heure.getLocalTime().format(timeFormatter);
+        if (!heure.toString().equals(formattedTime)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Veuillez entrer l'heure au format HH:mm:ss.");
+            alert.show();
+            return; // Exit method if time format is incorrect
+        }
         User user = new User(6);
         Défis defis = new Défis(name.getText(),imagePath,description.getText(),date.getValue(),heure.getLocalTime(),user);
         DéfisS defisS = new DéfisS();

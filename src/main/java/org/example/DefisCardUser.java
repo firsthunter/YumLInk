@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
-public class ChallU {
+public class DefisCardUser {
     @FXML
     private Label DateUser;
 
@@ -35,7 +35,7 @@ public class ChallU {
     @FXML
     private ImageView PhotoUser;
     private Défis d;
-    private Afficher afficher;
+    private AfficherDefis afficher;
 
     public void setd(Défis d) {
         this.d = d;
@@ -64,20 +64,16 @@ public class ChallU {
 
     public void Participer(ActionEvent Event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterPart.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterParticipation.fxml"));
             Parent root = loader.load();
-
-            AjouterPart ajouterPartController = loader.getController();
-
-            // Assuming 'd' is properly initialized elsewhere in your code
+            AjouterParticipation ajouterPartController = loader.getController();
             if (d != null) {
                 ajouterPartController.setData(d);
-
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
-                stage.show();
+                stage.showAndWait();
             } else {
-                // Handle the case where 'd' is null
+
                 System.err.println("The Défis object 'd' is null.");
             }
         } catch (IOException e) {

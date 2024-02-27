@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,7 +19,7 @@ import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 
 
-public class Chall {
+public class DefisCardChef {
 
     @FXML
     private Label DateC;
@@ -36,7 +38,7 @@ public class Chall {
     @FXML
     private Label Owner;
     private Défis d;
-    private Afficher afficher;
+    private AfficherDefis afficher;
 
     public void setD(Défis d) {
         this.d = d;
@@ -81,15 +83,26 @@ public class Chall {
     public void supp(ActionEvent actionEvent) {
 
         if (d != null) {
-            try {
-                DéfisS DS = new DéfisS();
-                DS.supprimer(d.getId_d());
-                afficher.refreshView();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                // Handle delete error
-            }
+            // Create a confirmation dialog
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Boîte de dialogue de confirmation");
+            alert.setHeaderText("Confirmer la suppression");
+            alert.setContentText("Êtes-vous sûr de vouloir supprimer ce défi?");
 
+            // Show the confirmation dialog and wait for user response
+            ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);
+
+            // If the user confirms deletion, proceed with deletion
+            if (result == ButtonType.OK) {
+                try {
+                    DéfisS DS = new DéfisS();
+                    DS.supprimer(d.getId_d());
+                    afficher.refreshView();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    // Handle delete error
+                }
+            }
         }
 
 
@@ -113,7 +126,7 @@ public class Chall {
         }
     }
 
-    public void setRefresh(Afficher afficher) {
+    public void setRefresh(AfficherDefis afficher) {
         this.afficher = afficher;
     }
 }

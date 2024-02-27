@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 
-public class Afficher {
+public class AfficherDefis {
 
     @FXML
     private GridPane GridPane;
@@ -41,9 +41,9 @@ public class Afficher {
                 col++;
                 // Load item.fxml for each Défis and set its data
                 FXMLLoader Loader;
-                Loader = new FXMLLoader(getClass().getResource("/chall.fxml"));
+                Loader = new FXMLLoader(getClass().getResource("/DefisCardChef.fxml"));
                 Parent interfaceRoot = Loader.load();
-                Chall itemController = Loader.getController();
+                DefisCardChef itemController = Loader.getController();
                 itemController.setData(défis);
                 itemController.setD(défis);
                 itemController.setRefresh(this);
@@ -75,11 +75,10 @@ public class Afficher {
 
 
     public void AjouterDefis(ActionEvent actionEvent) {
-
         try {
-            FXMLLoader root = new FXMLLoader(getClass().getResource("/defis.fxml"));
+            FXMLLoader root = new FXMLLoader(getClass().getResource("/DefisChef.fxml"));
             Parent page = root.load();
-            defiscontr defiscontr = root.getController();
+            DefisChef defiscontr = root.getController();
             defiscontr.setAfficher(this);
             Stage stage = new Stage();
             stage.setScene(new Scene(page));

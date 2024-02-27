@@ -20,16 +20,14 @@ public class ParticipantS implements PService<Participant> {
 
     @Override
     public void ajouterP(Participant participant) throws SQLException {
-        String req = "INSERT INTO participant ( photo_p,vote,idU,id_d) " +
-                "VALUES (?, ?, ?,?)";
+        String req = "INSERT INTO participant ( photo_p,idU,id_d) " +
+                "VALUES (?, ?, ?)";
         PreparedStatement preparedStatement = conn.prepareStatement(req);
         preparedStatement.setString(1, participant.getPhoto_p());
         preparedStatement.setInt(2,participant.getU().getIdU());
         preparedStatement.setInt(3,participant.getD().getId_d());
-
         preparedStatement.executeUpdate();
     }
-
   /*  @Override
     public void modifier(Participant participant) throws SQLException {
         String sql = "update participant set photo_p = ?  where idpart = ?";
@@ -53,8 +51,8 @@ public class ParticipantS implements PService<Participant> {
     public List<Participant> afficher() throws SQLException {
         Statement st = conn.createStatement();
         String req = "SELECT p.* , u.nom , u.prenom , u.idU ,d.nom_d ,d.id_d FROM participant p " +
-                "INNER JOIN user u ON p.idU = u.idU" +
-                "INNER JOIN defis d ON p.id_d = id_d";
+                "INNER JOIN user u ON p.idU = u.idU " +
+                "INNER JOIN defis d ON p.id_d = d.id_d";
         List <Participant> par = new ArrayList<>();
         ResultSet rs =st.executeQuery(req);
         while (rs.next()){

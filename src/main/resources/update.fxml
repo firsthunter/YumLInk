@@ -5,19 +5,40 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Update">
+<AnchorPane prefHeight="400.0" prefWidth="350.0" style="-fx-background-color: #D4ECE2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Update">
    <children>
-      <Label layoutX="114.0" layoutY="22.0" prefHeight="18.0" prefWidth="121.0" text="Défi modifier:" />
-      <Label layoutX="36.0" layoutY="63.0" text="Nom:" />
-      <Label layoutX="37.0" layoutY="100.0" text="Photo:" />
-      <Label layoutX="40.0" layoutY="192.0" text="Description:" />
-      <Label layoutX="40.0" layoutY="302.0" text="Date:" />
-      <Label layoutX="36.0" layoutY="343.0" text="Heure:" />
+      <Label layoutX="114.0" layoutY="22.0" prefHeight="18.0" prefWidth="121.0" text="Défi modifier:">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font></Label>
+      <Label layoutX="18.0" layoutY="62.0" text="Nom:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <Label layoutX="18.0" layoutY="100.0" text="Photo:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <Label layoutX="19.0" layoutY="213.0" text="Description:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <Label layoutX="22.0" layoutY="301.0" text="Date:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <Label layoutX="18.0" layoutY="351.0" text="Heure:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
       <ImageView fx:id="ImageU" fitHeight="88.0" fitWidth="132.0" layoutX="121.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="UpdateB" layoutX="278.0" layoutY="361.0" mnemonicParsing="false" onAction="#Update" text="Button" />
-      <Button fx:id="ImageB" layoutX="252.0" layoutY="166.0" mnemonicParsing="false" onAction="#AddP" text="Button" />
+      <Button fx:id="UpdateB" layoutX="257.0" layoutY="361.0" mnemonicParsing="false" onAction="#Update" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #237C55; -fx-background-radius: 20;" text="Modifier">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="ImageB" layoutX="263.0" layoutY="162.0" mnemonicParsing="false" onAction="#AddP" style="-fx-background-color: #237C55; -fx-background-radius: 20;" text="inserer" />
       <TextField fx:id="NomU" layoutX="101.0" layoutY="59.0" />
       <TextField fx:id="DisU" layoutX="113.0" layoutY="210.0" />
       <TextField fx:id="DateU" layoutX="101.0" layoutY="298.0" />

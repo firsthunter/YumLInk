@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AfficherPartic {
+public class AfficherParticipation {
 
     @FXML
     private GridPane Grid;
@@ -19,6 +19,7 @@ public class AfficherPartic {
     @FXML
     public void initialize() {
         loadContent();
+
     }
 
     private void loadContent() {
@@ -36,20 +37,18 @@ public class AfficherPartic {
                 col++;
 
                 FXMLLoader Loader;
-                Loader = new FXMLLoader(getClass().getResource("/challP.fxml"));
+                Loader = new FXMLLoader(getClass().getResource("/ParticipationCard.fxml"));
                 Parent interfaceRoot = Loader.load();
-                ChallP itemController = Loader.getController();
+                ParticipationCard itemController = Loader.getController();
                 itemController.setData(participant);
                 itemController.setD(participant);
                 itemController.setRefresh(this);
-
-                // Add the loaded item to the GridPane
                 Grid.add(interfaceRoot, col, row);
-                Grid.setHgap(20); // Set the horizontal gap between items
-                Grid.setVgap(20); // Set the vertical gap between items
+                Grid.setHgap(20);
+                Grid.setVgap(20);
 
-                // Adjust row and column indices
-                if (col == 5) { // Change this value based on your layout
+
+                if (col == 5) {
                     col = 0;
                     row++;
                 }

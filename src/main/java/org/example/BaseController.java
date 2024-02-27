@@ -64,9 +64,9 @@ public class BaseController implements Initializable {
 
     private void handleAfficherPartButtonClick() {
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherPartic.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherParticipation.fxml"));
             Parent defisPage = loader.load();
-            AfficherPartic affP = loader.getController();
+            AfficherParticipation affP = loader.getController();
             affP.setBaseController(this);
             page_content_anchorPane.getChildren().setAll(defisPage);
         }catch (IOException e){
@@ -77,9 +77,9 @@ public class BaseController implements Initializable {
     @FXML
     private void handleAffichergButtonClick() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Afficher.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherDefis.fxml"));
             Parent defisPage = loader.load();
-            Afficher afficher = loader.getController();
+            AfficherDefis afficher = loader.getController();
             afficher.setBaseController(this);
             page_content_anchorPane.getChildren().setAll(defisPage);
         } catch (IOException e) {
@@ -89,7 +89,7 @@ public class BaseController implements Initializable {
     @FXML
     private void handleDefisClientgButtonClick() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/defisUser.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/DefisUser.fxml"));
             Parent defisPage = loader.load();
             DefisUser defisUser = loader.getController();
             defisUser.setBaseController(this);

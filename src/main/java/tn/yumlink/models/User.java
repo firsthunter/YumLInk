@@ -13,6 +13,10 @@ public class User {
     public User() {
     }
 
+    public User(int idU) {
+        this.idU = idU;
+    }
+
     public User(int idU, String nom, String prenom) {
         this.idU = idU;
         this.nom = nom;

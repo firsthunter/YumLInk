@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Pagination;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -25,34 +26,38 @@ import java.util.ResourceBundle;
 
 public class BlogController implements Initializable {
     @FXML
-    Pagination pagination = new Pagination();
+    public VBox update_form;
     @FXML
-    private Button add_post_btn;
+    public TextField title_id_update;
+    @FXML
+    public TextField img_id_update;
+    @FXML
+    public TextField description_id_update;
+    @FXML
+    public Button update_post_btn;
+
+    @FXML
+    Pagination pagination = new Pagination();
     ArticleService articleService = new ArticleService();
     private List<Article> articles;
+    Article ArticleToUpdate = new Article();
     private BaseController baseController;
 
     public void setBaseController(BaseController baseController) {
         this.baseController = baseController;
     }
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            articles = articleService.fetchArticles();
-            pagination.setPageCount((int) Math.ceil((double) articles.size() / 9));
-            System.out.println((int) Math.ceil((double) articles.size() / 9));
-            pagination.setMaxPageIndicatorCount(3);
-            pagination.setPageFactory(new Callback<Integer, Node>() {
-                @Override
-                public Node call(Integer pageIndex) {
-                    return getPost_grid(pageIndex);
-                }
-            });
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        update_form.visibleProperty().set(false);
+        update_post_btn.visibleProperty().set(false);
+        loadArticles();
+        update_post_btn.setOnAction(actionEvent -> {
+            handleUpdateVbox();
+            loadArticles();
+            update_form.visibleProperty().set(false);
+            update_post_btn.visibleProperty().set(false);
+        });
     }
     private GridPane getPost_grid(int pageIndex){
         GridPane gridPane = new GridPane();
@@ -74,6 +79,7 @@ public class BlogController implements Initializable {
                 VBox vBox = fxmlLoader.load();
                 PostComponentController postComponent = fxmlLoader.getController();
                 postComponent.setBaseController(baseController);
+                postComponent.setBlogController(this);
                 postComponent.setArticle(article);
                 if (columns == 3) {
                     columns = 0;
@@ -91,10 +97,38 @@ public class BlogController implements Initializable {
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/UI/CreateNewPost.fxml"));
             Parent createNewPost = fxmlLoader.load();
-            Scene createNewPostScene = new Scene(createNewPost);
-            Stage stage = (Stage) add_post_btn.getScene().getWindow();
-            stage.setScene(createNewPostScene);
+            NewPostController newPostController = fxmlLoader.getController();
+            newPostController.setBaseController(baseController);
+            baseController.getView_content().getChildren().setAll(createNewPost);
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void loadArticles(){
+        try {
+            articles = articleService.fetchArticles();
+            pagination.setPageCount((int) Math.ceil((double) articles.size() / 9));
+            pagination.setMaxPageIndicatorCount(3);
+            pagination.setPageFactory(new Callback<Integer, Node>() {
+                @Override
+                public Node call(Integer pageIndex) {
+                    return getPost_grid(pageIndex);
+                }
+            });
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void handleUpdateVbox(){
+        String Newtitle = title_id_update.getText();
+        String NewImg = img_id_update.getText();
+        String NewDescription = description_id_update.getText();
+        ArticleToUpdate.setTitle_article(Newtitle);
+        ArticleToUpdate.setImg_article(NewImg);
+        ArticleToUpdate.setDescription_article(NewDescription);
+        try {
+            articleService.modifyArticle(ArticleToUpdate);
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

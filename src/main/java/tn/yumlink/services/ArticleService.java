@@ -5,6 +5,7 @@ import tn.yumlink.models.User;
 import tn.yumlink.utils.MyDatabase;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,19 +19,20 @@ public class ArticleService implements IServiceArticle<Article> {
     @Override
     public void addArticle(Article article) throws SQLException {
         Statement ste = connection.createStatement();
-        String req = "INSERT INTO article (title_article, img_article, description_article, nb_likes_article, date_published) "
-                + "VALUES('" + article.getTitle_article() + "','" + article.getImg_article() + "','" + article.getDescription_article() + "'," + article.getNb_likes_article() + ",'" + article.getDate_published() + "')";
+        String req = "INSERT INTO article (idU, title_article, img_article, description_article, nb_likes_article, date_published) "
+                + "VALUES('" + article.getUser().getIdU() + "','" + article.getTitle_article() + "','" + article.getImg_article() + "','" + article.getDescription_article() + "'," + article.getNb_likes_article() + ",'" + article.getDate_published() + "')";
         ste.executeUpdate(req);
     }
 
     @Override
     public void modifyArticle(Article article) throws SQLException {
-        String sql = "UPDATE article SET title_article = ?,img_article = ?, description_article = ? WHERE id_article = ?";
+        String sql = "UPDATE article SET title_article = ?,img_article = ?, description_article = ? , date_published = ? WHERE id_article = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, article.getTitle_article());
         preparedStatement.setString(2, article.getImg_article());
         preparedStatement.setString(3, article.getDescription_article());
-        preparedStatement.setInt(4, article.getId_article());
+        preparedStatement.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
+        preparedStatement.setInt(5, article.getId_article());
         preparedStatement.executeUpdate();
     }
 
@@ -45,7 +47,10 @@ public class ArticleService implements IServiceArticle<Article> {
 
     @Override
     public void deleteArticle(int id) throws SQLException {
-
+        String req = "DELETE FROM article WHERE id_article = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(req);
+        preparedStatement.setInt(1,id);
+        preparedStatement.executeUpdate();
     }
 
     @Override

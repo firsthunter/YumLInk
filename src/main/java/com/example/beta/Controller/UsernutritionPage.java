@@ -70,7 +70,7 @@ public class UsernutritionPage {
             String ageText = tf_age.getText().trim();
             String weightText = tf_poids.getText().trim();
             String heightText = tf_taille.getText().trim();
-            String userActivityLevel = actif.isSelected() ? "Active" : lazy.isSelected() ? "Lazy": "";
+            String userActivityLevel = actif.isSelected() ? "Active" : lazy.isSelected() ? "Lazy" : "";
             String userGender = Femme.isSelected() ? "Femme" : Homme.isSelected() ? "Homme" : "";
 
             // Check for empty fields
@@ -133,16 +133,28 @@ public class UsernutritionPage {
     }
 
     @FXML
-   void update_donnee_user(ActionEvent event) {
-       int userId =1;
-
+    void update_donnee_user(ActionEvent event) {
+        int userId = 1;
+        try {
             // Retrieve changed values from the text fields and radio buttons
             int newAge = Integer.parseInt(tf_age.getText());
             double newWeight = Double.parseDouble(tf_poids.getText());
-            System.out.println(newAge);
             double newHeight = Double.parseDouble(tf_taille.getText());
             String newActivityLevel = actif.isSelected() ? "Active" : "Lazy";
             String newGender = Femme.isSelected() ? "Femme" : "Homme";
+            if (newAge < 15 || newAge > 100) {
+                throw new IllegalArgumentException("L'âge doit être compris entre 15 et 100");
+
+            }
+
+            if (newWeight < 40 || newWeight > 250) {
+                throw new IllegalArgumentException("Le poids doit être compris entre 40 et 250");
+            }
+
+            if (newHeight < 140 || newHeight > 210) {
+                throw new IllegalArgumentException("La taille doit être comprise entre 140 et 210");
+            }
+
 
             // Create a new UserNutrition instance (un1) with both sets of values
             UserNutrition un1 = new UserNutrition(newAge, newWeight, newHeight, newActivityLevel, newGender);
@@ -158,6 +170,20 @@ public class UsernutritionPage {
             alert.setContentText("User nutrition data updated successfully.");
             alert.show();
         }
+        catch (NumberFormatException e) {
+            // Handle invalid number format
+            System.err.println("Erreur de format de nombre : " + e.getMessage());
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Veuillez saisir des valeurs numériques valides.");
+            alert.show();
+        } catch (IllegalArgumentException e) {
+            // Handle invalid input range
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText(e.getMessage());
+            alert.show();
+        };
+}
+
     @FXML
     void Affiche_donnee_user(ActionEvent event) {
         int userId = 1; // Replace this with the actual user ID

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="552.0" prefWidth="442.0" styleClass="form" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ModifierAdmin">
+   <children>
+      <TextField fx:id="tf_nom_m" layoutX="164.0" layoutY="47.0" prefHeight="26.0" prefWidth="251.0" />
+      <Label layoutX="54.0" layoutY="52.0" prefHeight="18.0" prefWidth="42.0" text="Nom" />
+      <Label layoutX="56.0" layoutY="122.0" text="Description" />
+      <TextField fx:id="tf_desc_m" layoutX="164.0" layoutY="117.0" prefHeight="87.0" prefWidth="251.0" />
+      <Label layoutX="62.0" layoutY="184.0" text="imageS" />
+      <TextField fx:id="tf_Calorie_m" layoutX="295.0" layoutY="354.0" prefHeight="26.0" prefWidth="52.0" />
+      <Label layoutX="290.0" layoutY="315.0" text="Calorie" />
+      <TextField fx:id="tf_prot_m" layoutX="64.0" layoutY="354.0" prefHeight="26.0" prefWidth="62.0" />
+      <Label layoutX="65.0" layoutY="315.0" prefHeight="18.0" prefWidth="61.0" text="Proteine" />
+      <Button fx:id="Btn_update_m" layoutX="171.0" layoutY="494.0" mnemonicParsing="false" onAction="#Update" styleClass="button_f" text="Update" />
+      <ComboBox fx:id="comboB" layoutX="32.0" layoutY="422.0" prefWidth="150.0" />
+      <TextField fx:id="tf_ing_m" layoutX="258.0" layoutY="419.0" prefWidth="171.0" />
+      <ImageView fx:id="imgC_m" fitHeight="107.0" fitWidth="202.0" layoutX="194.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="AddImg_m" layoutX="57.0" layoutY="238.0" mnemonicParsing="false" onAction="#Addimgm" prefWidth="86.0" styleClass="button_f" text="add image" />
+   </children>
+   <opaqueInsets>
+      <Insets right="50.0" />
+   </opaqueInsets>
+</AnchorPane>

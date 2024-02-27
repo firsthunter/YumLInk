@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddRecetteChef">
+   <children>
+      <AnchorPane layoutX="415.0" layoutY="174.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="552.0" prefWidth="442.0" styleClass="form" stylesheets="@style.css">
+         <children>
+            <TextField fx:id="tf_nom_c" layoutX="164.0" layoutY="47.0" prefHeight="26.0" prefWidth="251.0" />
+            <Label layoutX="54.0" layoutY="52.0" prefHeight="18.0" prefWidth="42.0" text="Nom" />
+            <Label layoutX="56.0" layoutY="122.0" text="Description" />
+            <TextField fx:id="tf_desc_c" layoutX="164.0" layoutY="117.0" prefHeight="87.0" prefWidth="251.0" />
+            <Label layoutX="62.0" layoutY="184.0" text="imageS" />
+            <TextField fx:id="tf_Calorie_c" layoutX="295.0" layoutY="354.0" prefHeight="26.0" prefWidth="52.0" />
+            <Label layoutX="290.0" layoutY="315.0" text="Calorie" />
+            <TextField fx:id="tf_prot_c" layoutX="64.0" layoutY="354.0" prefHeight="26.0" prefWidth="62.0" />
+            <Label layoutX="65.0" layoutY="315.0" prefHeight="18.0" prefWidth="61.0" text="Proteine" />
+            <Button fx:id="addChef" layoutX="171.0" layoutY="486.0" mnemonicParsing="false" onAction="#Ajouter" prefWidth="125.0" styleClass="button_f" text="Add" />
+            <ComboBox fx:id="comboB" layoutX="32.0" layoutY="422.0" prefWidth="150.0" />
+            <TextField fx:id="tf_ing" layoutX="258.0" layoutY="419.0" prefWidth="171.0" />
+            <ImageView fx:id="imgC_c" fitHeight="107.0" fitWidth="202.0" layoutX="194.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="AddImgc" layoutX="57.0" layoutY="238.0" mnemonicParsing="false" onAction="#Addimgc" prefWidth="86.0" styleClass="button_f" text="add image" />
+         </children>
+         <opaqueInsets>
+            <Insets right="50.0" />
+         </opaqueInsets>
+      </AnchorPane>
+      <AnchorPane layoutY="85.0" prefHeight="54.0" prefWidth="1200.0" style="-fx-background-color: #D4ECE2;">
+         <children>
+            <Label layoutX="462.0" layoutY="4.0" prefHeight="20.0" prefWidth="349.0">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="15.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" layoutX="24.0" layoutY="3.0" prefHeight="46.0" prefWidth="175.0">
+               <children>
+                  <ImageView fitHeight="35.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@icons/supper_311752.png" />
+                     </image>
+                  </ImageView>
+                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" style="-fx-background-color: #D4ECE2;" text="Recette">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="214.0" layoutY="3.0" prefHeight="46.0" prefWidth="175.0">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@icons/store_7384740.png" />
+                     </image>
+                  </ImageView>
+                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" style="-fx-background-color: #D4ECE2;" text="Shop">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="389.0" layoutY="4.0" prefHeight="46.0" prefWidth="175.0">
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@icons/blogging_3829247.png" />
+                     </image>
+                  </ImageView>
+                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" style="-fx-background-color: #D4ECE2;" text="Blog">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="690.0" layoutY="4.0" prefHeight="46.0" prefWidth="175.0">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@icons/target_9030623.png" />
+                     </image>
+                  </ImageView>
+                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" style="-fx-background-color: #D4ECE2;" text="Défis">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="896.0" layoutY="4.0" prefHeight="46.0" prefWidth="175.0">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@icons/nutrition_649371.png" />
+                     </image>
+                  </ImageView>
+                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" style="-fx-background-color: #D4ECE2;" text="Diet">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="-3.0" prefHeight="33.0" prefWidth="1200.0" style="-fx-background-color: #D4ECE2;">
+         <children>
+            <Label layoutX="462.0" layoutY="4.0" prefHeight="20.0" prefWidth="349.0" text="Savourez l'art de la cuisine, Ou que vous soyez">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Pane layoutX="-5.0" layoutY="31.0" prefHeight="54.0" prefWidth="1206.0" style="-fx-background-color: #237C55;">
+         <children>
+            <Circle fill="WHITE" layoutX="625.0" layoutY="40.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke-width: 0;" />
+            <ImageView fitHeight="78.0" fitWidth="79.0" layoutX="585.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/426128092_938915761173502_2390909574373853801_n-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <HBox alignment="CENTER" layoutX="1021.0" layoutY="4.0" prefHeight="46.0" prefWidth="175.0">
+               <children>
+                  <ImageView fitHeight="24.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@icons/man_2922510.png" />
+                     </image>
+                  </ImageView>
+                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="89.0" style="-fx-background-color: #237C55;" text="My account">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="846.0" layoutY="4.0" prefHeight="46.0" prefWidth="175.0">
+               <children>
+                  <ImageView fitHeight="24.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@icons/8666616_shopping_cart_icon.png" />
+                     </image>
+                  </ImageView>
+                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="89.0" style="-fx-background-color: #237C55;" text="My basket">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

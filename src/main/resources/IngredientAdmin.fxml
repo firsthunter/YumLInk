@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.IngredientAdmin">
+   <children>
+      <AnchorPane layoutX="-2.0" layoutY="2.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="617.0" prefWidth="195.0" style="-fx-background-color: #D4ECE2;" styleClass="side-bar" stylesheets="@style.css">
+         <children>
+            <HBox alignment="CENTER" layoutX="9.0" layoutY="128.0" prefHeight="50.0" prefWidth="174.0">
+               <children>
+                  <ImageView fitHeight="32.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@8666802_menu_navigation_icon.png" />
+                     </image>
+                  </ImageView>
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="86.0" text="Home" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="25.0" layoutY="199.0" prefHeight="50.0" prefWidth="174.0">
+               <children>
+                  <ImageView fitHeight="32.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@8666803_folder_documents_icon.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="listRecette" mnemonicParsing="false" onAction="#ListRecette" prefHeight="38.0" prefWidth="114.0" text="Liste Recettes" />
+               </children>
+            </HBox>
+            <ImageView fitHeight="95.0" fitWidth="122.0" layoutX="46.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/426128092_938915761173502_2390909574373853801_n-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="76.0" layoutY="264.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="127.0" text="Liste Ingredients " />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="188.0" layoutY="2.0" prefHeight="54.0" prefWidth="1318.0" style="-fx-background-color: #D4ECE2;">
+         <children>
+            <HBox alignment="CENTER" layoutX="77.0" layoutY="4.0" prefHeight="46.0" prefWidth="175.0">
+               <children>
+                  <ImageView fitHeight="35.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@icons/supper_311752.png" />
+                     </image>
+                  </ImageView>
+                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" style="-fx-background-color: #D4ECE2;" text="Recette">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="289.0" layoutY="4.0" prefHeight="46.0" prefWidth="175.0">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@icons/store_7384740.png" />
+                     </image>
+                  </ImageView>
+                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" style="-fx-background-color: #D4ECE2;" text="Shop">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="506.0" layoutY="4.0" prefHeight="46.0" prefWidth="175.0">
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@icons/blogging_3829247.png" />
+                     </image>
+                  </ImageView>
+                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" style="-fx-background-color: #D4ECE2;" text="Blog">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="722.0" layoutY="4.0" prefHeight="46.0" prefWidth="175.0">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@icons/target_9030623.png" />
+                     </image>
+                  </ImageView>
+                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" style="-fx-background-color: #D4ECE2;" text="Défis">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="923.0" layoutY="4.0" prefHeight="46.0" prefWidth="175.0">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@icons/nutrition_649371.png" />
+                     </image>
+                  </ImageView>
+                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" style="-fx-background-color: #D4ECE2;" text="Diet">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="1145.0" layoutY="4.0" prefHeight="46.0" prefWidth="175.0">
+               <children>
+                  <ImageView fitHeight="24.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@icons/man_2922510.png" />
+                     </image>
+                  </ImageView>
+                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="89.0" style="-fx-background-color: #D4ECE2;" text="My account">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <TableView fx:id="TableIngredient" layoutX="264.0" layoutY="102.0" prefHeight="435.0" prefWidth="690.0" styleClass="tab-pane" stylesheets="@style.css">
+        <columns>
+          <TableColumn fx:id="col_id_ing" prefWidth="127.99993896484375" text="ID" />
+          <TableColumn fx:id="col_nom_ing" prefWidth="98.39996337890625" text="Nom" />
+            <TableColumn fx:id="col_quantite_ing" minWidth="0.0" prefWidth="100.80007934570312" text="Quantite" />
+        </columns>
+      </TableView>
+      <Pane layoutX="1035.0" layoutY="136.0" prefHeight="282.0" prefWidth="384.0" styleClass="form" stylesheets="@style.css">
+         <children>
+            <TextField fx:id="tf_nomIng" layoutX="180.0" layoutY="56.0" />
+            <TextField fx:id="tf_quantite" layoutX="180.0" layoutY="109.0" />
+            <Label layoutX="63.0" layoutY="60.0" prefHeight="17.0" prefWidth="43.0" text="nom" />
+            <Label layoutX="63.0" layoutY="113.0" prefHeight="20.0" prefWidth="70.0" text="Quantite" />
+            <Button fx:id="btn_add_ing" layoutX="59.0" layoutY="201.0" mnemonicParsing="false" onAction="#Add_ing" prefHeight="25.0" prefWidth="55.0" styleClass="button_f" text="Add " />
+            <Button fx:id="btn_update_ing" layoutX="227.0" layoutY="201.0" mnemonicParsing="false" onAction="#Update_ing" prefHeight="25.0" prefWidth="70.0" styleClass="button_f" text="Update " />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

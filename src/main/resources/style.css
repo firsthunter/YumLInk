@@ -1,0 +1,95 @@
+/* Styles for TabPane */
+.tab-pane {
+    -fx-background-color: #F7E6C2; /* Background color */
+    -fx-background-radius: 10px; /* Radius for rounded corners */
+    -fx-padding: 10px; /* Add padding */
+}
+
+/* Styles for tabs */
+.tab {
+    -fx-background-color: #DD6213; /* Tab background color */
+    -fx-text-fill: white; /* Tab text color */
+    -fx-font-weight: bold; /* Bold font for tabs */
+    -fx-alignment: CENTER; /* Center-align the text */
+}
+
+/* Styles for selected tab */
+.tab:selected {
+    -fx-background-color: #568D33; /* Background color for selected tab */
+}
+.side-bar {
+    -fx-background-color: #F7E6C2; /* Background color */
+    -fx-background-radius: 10px; /* Radius for rounded corners */
+    -fx-padding: 10px; /* Add padding */
+}
+
+/* Styles for buttons in the SideBar */
+.side-bar .button {
+    -fx-background-color: transparent; /* Transparent background color */
+    -fx-text-fill: #333333; /* Text color */
+    -fx-font-weight: bold; /* Bold font for buttons */
+    -fx-padding: 10px; /* Add padding */
+}
+
+/* Hover effect for buttons */
+.side-bar .button:hover {
+    -fx-background-color: #DD6213; /* Background color on hover */
+    -fx-text-fill: white; /* Text color on hover */
+}
+.form {
+    -fx-background-color: #F7E6C2; /* Background color */
+    -fx-background-radius: 10px; /* Radius for rounded corners */
+    -fx-padding: 20px; /* Add padding */
+}
+
+/* Styles for labels */
+.label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333; /* Text color */
+}
+
+/* Styles for text fields */
+.text-field {
+    -fx-background-color: white; /* Set background color for text field */
+    -fx-text-fill: #333333; /* Set text color for text field */
+    -fx-pref-height: 30px; /* Set preferred height */
+    -fx-padding: 5px; /* Add padding */
+}
+
+/* Styles for buttons */
+.button_f {
+    -fx-background-color: #DD6213; /* Background color */
+    -fx-text-fill: white; /* Text color */
+    -fx-font-size: 14px;
+    -fx-pref-height: 35px; /* Set preferred height */
+    -fx-pref-width: 100px; /* Set preferred width */
+    -fx-padding: 5px; /* Add padding */
+}
+.recipe-container {
+    -fx-background-color: #F7F7F7; /* Light gray background */
+    -fx-border-color: #CCCCCC; /* Light gray border */
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px; /* Rounded corners */
+    -fx-padding: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 2); /* Drop shadow */
+}
+
+.title-label {
+    -fx-font-size: 18px; /* Larger font size */
+    -fx-font-weight: bold; /* Bold font */
+    -fx-text-fill: #336699; /* Blue text color */
+}
+
+.description-label {
+    -fx-font-size: 14px; /* Smaller font size */
+    -fx-text-fill: #666666; /* Dark gray text color */
+}
+
+.show-more-button {
+    -fx-background-color: #66CC99; /* Green background */
+    -fx-text-fill: white; /* White text color */
+    -fx-font-size: 14px; /* Font size */
+    -fx-padding: 5px 10px; /* Padding */
+    -fx-border-radius: 5px; /* Rounded corners */
+}

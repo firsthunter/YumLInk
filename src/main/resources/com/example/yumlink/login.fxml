@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.login">
+    <children>
+        <BorderPane prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #ffff;">
+            <left>
+                <Pane prefHeight="600.0" prefWidth="550.0" style="-fx-background-color: #F7E6C2;" BorderPane.alignment="CENTER">
+                    <children>
+                        <ImageView fitHeight="367.0" fitWidth="425.0" layoutX="67.0" layoutY="131.0">
+                            <image>
+                                <Image url="@images/slata.png" />
+                            </image>
+                        </ImageView>
+                  <ImageView fitHeight="184.0" fitWidth="187.0" layoutX="284.0" layoutY="361.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/osben.png" />
+                     </image>
+                  </ImageView>
+                    </children>
+                </Pane>
+            </left>
+            <center>
+                <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Pane fx:id="paneSignUp" prefHeight="600.0" prefWidth="798.0" style="-fx-background-color: #ffff;">
+                            <children>
+                                <TextField fx:id="tfNom" layoutX="31.0" layoutY="186.0" prefHeight="30.0" prefWidth="250.0" promptText="Nom" style="-fx-background-radius: 50; -fx-border-color: #DD6213; -fx-border-radius: 50;" />
+                                <TextField fx:id="tfPrenom" layoutX="387.0" layoutY="186.0" prefHeight="30.0" prefWidth="250.0" promptText="Prenom" style="-fx-border-radius: 15; -fx-border-color: #DD6213; -fx-background-radius: 15;" />
+                                <TextField fx:id="tfEmailSU" layoutX="31.0" layoutY="242.0" prefHeight="30.0" prefWidth="250.0" promptText="Email" style="-fx-background-radius: 15; -fx-border-color: #DD6213; -fx-border-radius: 15;" />
+                                <Button fx:id="btnInscrip" layoutX="235.0" layoutY="545.0" mnemonicParsing="false" onAction="#SinscrireAction" prefHeight="30.0" prefWidth="222.0" style="-fx-background-color: #DD6213; -fx-background-radius: 50;" text="S'inscrire" textFill="WHITE" />
+                                <Label alignment="CENTER" layoutX="235.0" layoutY="108.0" prefHeight="56.0" prefWidth="237.0" text="Sign Up" textAlignment="CENTER" textFill="#568d33">
+                                    <font>
+                                        <Font name="Century Schoolbook Bold" size="44.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="tfGouv" layoutX="386.0" layoutY="360.0" prefHeight="30.0" prefWidth="250.0" promptText="Gouvernorat" style="-fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #DD6213;" />
+                                <TextField fx:id="tfTel" layoutX="29.0" layoutY="300.0" prefHeight="30.0" prefWidth="255.0" promptText="Telephone" style="-fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: #DD6213;" />
+                                <ComboBox fx:id="cbRole" layoutX="388.0" layoutY="300.0" prefHeight="30.0" prefWidth="250.0" promptText="role" style="-fx-background-radius: 15; -fx-border-color: #DD6213; -fx-border-radius: 15;" />
+                                <ImageView fitHeight="102.0" fitWidth="201.0" layoutX="248.0" layoutY="6.0">
+                                    <image>
+                                        <Image url="@images/logo-removebg-preview.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fx:id="btnBackLogin" fitHeight="52.0" fitWidth="48.0" layoutX="40.0" layoutY="42.0" onMouseClicked="#backClicked" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/back.png" />
+                                    </image>
+                                </ImageView>
+                        <TextField fx:id="tfImagePath" layoutX="29.0" layoutY="358.0" prefHeight="30.0" prefWidth="250.0" promptText="inserer votre image" style="-fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: #DD6213;" />
+                        <Button fx:id="btnImage" layoutX="200.0" layoutY="359.0" mnemonicParsing="false" onAction="#getImagePath" prefHeight="30.0" prefWidth="84.0" style="-fx-background-radius: 15; -fx-background-color: #DD6213; -fx-border-radius: 15;" text="image" />
+                        <PasswordField fx:id="tfpwdSu" layoutX="387.0" layoutY="242.0" prefHeight="30.0" prefWidth="250.0" promptText="Mot de passe " style="-fx-border-color: #DD6213; -fx-background-radius: 15; -fx-border-radius: 15;" />
+                        <TextField fx:id="tfVille" layoutX="32.0" layoutY="426.0" prefHeight="30.0" prefWidth="250.0" promptText="Ville" style="-fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #DD6213;" />
+                        <TextField fx:id="tfCodePostal" layoutX="386.0" layoutY="426.0" prefHeight="30.0" prefWidth="250.0" promptText="Code Postal" style="-fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #DD6213;" />
+                        <TextField fx:id="tfRue" layoutX="221.0" layoutY="479.0" prefHeight="30.0" prefWidth="250.0" promptText="Rue" style="-fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #DD6213;" />
+                            </children>
+                        </Pane>
+                        <Pane fx:id="paneSignIn" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffff;">
+                            <children>
+                                <TextField fx:id="tfEmail" layoutX="159.0" layoutY="265.0" prefHeight="35.0" prefWidth="340.0" promptText="Email" style="-fx-background-radius: 15; -fx-border-color: #DD6213; -fx-border-radius: 15;" />
+                                <Button fx:id="btnLogin" layoutX="223.0" layoutY="442.0" mnemonicParsing="false" onAction="#login" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #DD6213; -fx-background-radius: 15;" text="login" textFill="WHITE" />
+                                <ImageView fitHeight="150.0" fitWidth="181.0" layoutX="238.0" layoutY="14.0">
+                                    <image>
+                                        <Image url="@images/logo-removebg-preview.png" />
+                                    </image>
+                                </ImageView>
+                                <Label layoutX="230.0" layoutY="164.0" text="Sign In" textFill="#568d33">
+                                    <font>
+                                        <Font name="System Bold" size="57.0" />
+                                    </font>
+                                </Label>
+                                <Button fx:id="btnSignUp" layoutX="173.0" layoutY="541.0" mnemonicParsing="false" onAction="#SignUpAction" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #DD6213; -fx-background-radius: 15;" text="I don't have an account" textFill="WHITE" />
+                        <PasswordField fx:id="tfpwdL" layoutX="159.0" layoutY="345.0" prefHeight="35.0" prefWidth="340.0" promptText="Mot de passe" style="-fx-border-color: #DD6213; -fx-background-radius: 15; -fx-border-radius: 15;" />
+                            </children>
+                        </Pane>
+                    </children>
+                </StackPane>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>

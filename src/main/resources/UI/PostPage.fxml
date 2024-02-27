@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.yumlink.GUI.PostPageController">
+     <content>
+         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="1100.0">
+             <VBox alignment="BASELINE_CENTER" prefHeight="600.0" prefWidth="1100.0" spacing="10">
+                 <Label fx:id="title_id" text="Classic Spaghetti Carbonara" />
+                 <VBox prefHeight="0.0" prefWidth="100.0">
+                     <children>
+                         <Label fx:id="author" text="Robert Jean" />
+                         <Label fx:id="date_published_id" text="Publie le 22 Feb 2023 à 22h00" />
+                     </children>
+                 </VBox>
+            <Label fx:id="article_content_id" text="contenu" />
+                  <Button fx:id="toggleCommentsButton" text="Comments" />
+            <VBox fx:id="comment_section" prefHeight="200.0" prefWidth="100.0" visible="false" />
+             </VBox>
+         </AnchorPane>
+
+     </content>
+   </ScrollPane>

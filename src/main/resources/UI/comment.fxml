@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<VBox prefWidth="400" spacing="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.yumlink.GUI.CommentController">
+    <VBox fx:id="commentContainer" spacing="5">
+        <HBox spacing="5">
+            <Circle fill="lightgray" radius="20" stroke="black">
+            </Circle>
+            <VBox spacing="3">
+                <HBox spacing="5">
+                    <Label fx:id="userName" text="Alex addams" />
+                   <Label fx:id="commentDate" text="Publie le 12/02/2024" wrapText="true" />
+                </HBox>
+                 <Label fx:id="commentText" text="mon commentaire" />
+            </VBox>
+        </HBox>
+    </VBox>
+</VBox>

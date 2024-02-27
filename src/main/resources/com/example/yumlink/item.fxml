@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.yumlink.ItemController">
+    <styleClass>
+        <String fx:value="fruit-item" />
+        <String fx:value="shadow" />
+    </styleClass>
+   <children>
+      <VBox prefHeight="398.0" prefWidth="287.0" style="-fx-background-color: #ffff; -fx-background-radius: 15; -fx-border-color: #dd6213; -fx-border-radius: 15; -fx-border-style: solid;">
+         <children>
+            <HBox prefHeight="69.0" prefWidth="313.0">
+               <children>
+                  <Label fx:id="fruitNameLable" prefHeight="68.0" prefWidth="253.0" text="prix:">
+                     <font>
+                        <Font name="Cambria Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="fruitPriceLabel" prefHeight="46.0" prefWidth="254.0" text="22">
+                     <font>
+                        <Font name="Cambria" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <ImageView fx:id="fruitImg" fitHeight="216.0" fitWidth="284.0" pickOnBounds="true" preserveRatio="true" />
+            <HBox prefHeight="37.0" prefWidth="281.0">
+               <children>
+                  <Label prefHeight="37.0" prefWidth="139.0" text="piece:" textFill="#141414">
+                     <font>
+                        <Font name="Cambria" size="24.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="numberComboBox" prefHeight="37.0" prefWidth="106.0" promptText="1" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #dd6213;" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0">
+               <children>
+                  <Separator prefHeight="0.0" prefWidth="118.0" />
+                  <Label alignment="CENTER" prefHeight="45.0" prefWidth="64.0" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="24.0" />
+                     </font>
+                  </Label>
+                  <Separator prefHeight="0.0" prefWidth="118.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="48.0" prefWidth="319.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="113.0" text="Num serie" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="numserie" prefHeight="31.0" prefWidth="176.0" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="addP" alignment="CENTER" mnemonicParsing="false" onAction="#addpanier" prefHeight="32.0" prefWidth="157.0" styleClass="add-btn" text="ADD TO CART" textFill="#ffffff">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

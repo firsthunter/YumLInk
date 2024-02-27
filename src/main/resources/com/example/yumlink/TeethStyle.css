@@ -1,0 +1,15 @@
+/**
+ * @author SFernando
+ */
+
+.toggle-button {
+
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+}
+
+.toggle-button:selected {
+
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+}

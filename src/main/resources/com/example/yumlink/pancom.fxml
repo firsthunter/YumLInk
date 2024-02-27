@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="158.0" prefWidth="604.0" style="-fx-background-color: fdf8ef; -fx-border-color: DD6213FF; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.yumlink.pancomController">
+<AnchorPane prefHeight="143.0" prefWidth="686.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="6.0" layoutY="2.0" prefHeight="143.0" prefWidth="683.0">
+         <children>
+            <HBox prefHeight="150.0" prefWidth="605.0">
+               <children>
+                     <VBox prefHeight="150.0" prefWidth="42.0">
+                        <children>
+                           <Button fx:id="butd" mnemonicParsing="false" onAction="#removeproduit" prefHeight="143.0" prefWidth="42.0" style="-fx-background-color: #ffff;" text="Button" />
+                           <TextField fx:id="idonlyread" prefHeight="25.0" prefWidth="12.0" />
+                        </children>
+                     </VBox>
+                  <ImageView fx:id="pimage" fitHeight="150.0" fitWidth="192.0" pickOnBounds="true" preserveRatio="true" />
+                     <VBox alignment="CENTER" prefHeight="150.0" prefWidth="77.0">
+                        <children>
+                        <TextField fx:id="name" prefHeight="55.0" prefWidth="100.0" text="name" />
+                        </children>
+                     </VBox>
+                     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                        <children>
+                        <TextField fx:id="quantite" prefHeight="54.0" prefWidth="100.0" text="quantite" />
+                        </children>
+                     </VBox>
+                     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                        <children>
+                        <TextField fx:id="prix" prefHeight="56.0" prefWidth="100.0" text="prix" />
+                        </children>
+                     </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
+</BorderPane>

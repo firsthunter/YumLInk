@@ -1,0 +1,34 @@
+.nav-bar-background-quote {
+    -fx-background-color: #f7e6c2;
+}
+
+.main-nav-bar-background {
+    -fx-background-color: #74ae4e;
+}
+
+.logo_circle {
+    -fx-stroke-width: 0;
+    -fx-fill: #ffffff;
+}
+
+.button-nav-bar {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-font-size: 20;
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-text-fill: #ffffff;
+}
+
+.button-feature {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-font-size: 20;
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-text-fill: #237C55;
+}
+
+.quote {
+    -fx-font-size: 15;
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-text-fill: #237C55;
+}

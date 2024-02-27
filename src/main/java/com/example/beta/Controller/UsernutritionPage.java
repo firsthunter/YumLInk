@@ -55,7 +55,11 @@ public class UsernutritionPage {
     private Label label_protein;
 
 
+    BaseController baseController;
 
+    public void setBaseController(BaseController baseController) {
+        this.baseController = baseController;
+    }
 
     @FXML
     void ajouter_user_info(ActionEvent event) {
@@ -157,7 +161,9 @@ public class UsernutritionPage {
     @FXML
     void Affiche_donnee_user(ActionEvent event) {
         int userId = 1; // Replace this with the actual user ID
-        UserNutrition un = UserNutrition_Service.getUserNutrition(userId);
+        UserNutrition_Service userNutritionService = new UserNutrition_Service();
+        UserNutrition un = new UserNutrition();
+        un = userNutritionService.getUserNutrition(userId);
         System.out.println(un);
         if (un != null) {
             // Display the user nutrition data in labels

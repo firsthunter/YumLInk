@@ -18,7 +18,10 @@ public class CommentService implements IServiceComment<Comment> {
 
     @Override
     public void addComment(Comment comment) throws SQLException {
-
+        Statement ste = connection.createStatement();
+        String req = "INSERT INTO commentaire (id_article, idU, comment_text, comment_date) "
+                + "VALUES('" + comment.getArticle_id() + "','" + comment.getUser().getIdU() + "','" + comment.getComment_text() + "','" + comment.getComment_date() + "')";
+        ste.executeUpdate(req);
     }
 
     @Override
@@ -33,7 +36,10 @@ public class CommentService implements IServiceComment<Comment> {
 
     @Override
     public void deleteComment(int id) throws SQLException {
-
+        String req = "DELETE FROM commentaire WHERE comment_id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(req);
+        preparedStatement.setInt(1,id);
+        preparedStatement.executeUpdate();
     }
 
     @Override

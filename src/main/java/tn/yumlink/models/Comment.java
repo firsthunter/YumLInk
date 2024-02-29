@@ -12,6 +12,13 @@ public class Comment {
     public Comment() {
     }
 
+    public Comment(int article_id, User user, String comment_text, LocalDate comment_date) {
+        this.article_id = article_id;
+        this.user = user;
+        this.comment_text = comment_text;
+        this.comment_date = comment_date;
+    }
+
     public Comment(int comment_id, int article_id, User user, String comment_text, LocalDate comment_date) {
         this.comment_id = comment_id;
         this.article_id = article_id;

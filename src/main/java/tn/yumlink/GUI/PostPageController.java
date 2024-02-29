@@ -5,16 +5,25 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import tn.yumlink.models.Article;
 import tn.yumlink.models.Comment;
+import tn.yumlink.models.User;
 import tn.yumlink.services.CommentService;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class PostPageController {
+    @FXML
+    public TextField comment_cree_id;
+    @FXML
+    public Button ajouter_comment_btn;
 
     @FXML
     private Label article_content_id;
@@ -72,7 +81,7 @@ public class PostPageController {
         }
     }
 
-    private void updateCommentSection() {
+    public void updateCommentSection() {
         comment_section.getChildren().clear();
         comment_section.visibleProperty().set(true);
         for (Comment comment : comments) {
@@ -81,11 +90,25 @@ public class PostPageController {
                 Node commentNode = loader.load();
                 CommentController commentController = loader.getController();
                 commentController.set_comment(comment);
+                commentController.setPostPageController(this);
                 comment_section.getChildren().add(commentNode);
             } catch (IOException e) {
                 System.out.println(e.getMessage());
                 e.printStackTrace();
             }
+        }
+    }
+    @FXML
+    private void CreateComment() {
+        User user = new User(6);
+        String comment_content = comment_cree_id.getText();
+        LocalDate currentDateTime = LocalDate.now();
+        Comment comment = new Comment(article.getId_article(),user,comment_content, currentDateTime);
+        try {
+            commentService.addComment(comment);
+            fetchCommentsById(article.getId_article());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

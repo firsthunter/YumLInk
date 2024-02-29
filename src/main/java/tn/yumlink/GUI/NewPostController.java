@@ -44,36 +44,57 @@ public class NewPostController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         create_post_btn.setOnAction(actionEvent -> {
-            Article article = new Article();
-            LocalDateTime currentDateTime = LocalDateTime.now();
-            article.setDate_published(currentDateTime);
-            article.setNb_likes_article(0);
-            article.setTitle_article(title_id.getText());
-            article.setDescription_article(description_id.getText());
-            article.setImg_article(img_id.getText());
-            User user = new User(6);
-            article.setUser(user);
-            try {
-                articleService.addArticle(article);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-//            ImageView checkmarkImageView = new ImageView(new Image("green_checkmark.png"));
-            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/Blog.fxml"));
-                Parent blogPage = null;
+            if (verifyText(title_id.getText(),description_id.getText(),img_id.getText())){
+                Article article = new Article();
+                LocalDateTime currentDateTime = LocalDateTime.now();
+                article.setDate_published(currentDateTime);
+                article.setNb_likes_article(0);
+                article.setTitle_article(title_id.getText());
+                article.setDescription_article(description_id.getText());
+                article.setImg_article(img_id.getText());
+                User user = new User(6);
+                article.setUser(user);
                 try {
-                    blogPage = loader.load();
-                } catch (IOException e) {
+                    articleService.addArticle(article);
+                } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-                BlogController blogController = loader.getController();
-                blogController.setBaseController(baseController);
-                baseController.getView_content().getChildren().clear();
-                baseController.getView_content().getChildren().setAll(blogPage);
-            }));
-            timeline.play();
+//          ImageView checkmarkImageView = new ImageView(new Image("green_checkmark.png"));
+                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/Blog.fxml"));
+                    Parent blogPage = null;
+                    try {
+                        blogPage = loader.load();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    BlogController blogController = loader.getController();
+                    blogController.setBaseController(baseController);
+                    baseController.getView_content().getChildren().clear();
+                    baseController.getView_content().getChildren().setAll(blogPage);
+                }));
+                timeline.play();
+            }
         });
+    }
+    private boolean verifyText(String title, String description, String image){
+        title_id.setStyle("");
+        img_id.setStyle("");
+        description_id.setStyle("");
+        if (title.isEmpty()) {
+            title_id.setStyle("-fx-border-color: red;");
+            return false;
+        }
+        if (image.isEmpty()) {
+            img_id.setStyle("-fx-border-color: red;");
+            return false;
+        }
+        if (description.isEmpty()) {
+            description_id.setStyle("-fx-border-color: red;");
+            return false;
+        }
+
+        return true;
     }
 
 }

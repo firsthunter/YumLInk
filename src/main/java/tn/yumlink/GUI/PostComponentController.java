@@ -3,8 +3,7 @@ package tn.yumlink.GUI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import tn.yumlink.models.Article;
@@ -12,9 +11,9 @@ import tn.yumlink.services.ArticleService;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class PostComponentController {
-
     public Button supprimer_btn;
     public Button modifier_btn;
     @FXML
@@ -57,9 +56,28 @@ public class PostComponentController {
         set_post_elements(article);
     }
 
-    public void handleDelete() throws SQLException, IOException {
-        articleService.deleteArticle(article.getId_article());
-        blogController.loadArticles();
+    public void handleDelete() throws IOException {
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationAlert.setTitle("Confirm Deletion");
+        confirmationAlert.setHeaderText("Are you sure you want to delete this article?");
+        ButtonType yesButtonType = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType noButtonType = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        confirmationAlert.getButtonTypes().setAll(yesButtonType, noButtonType);
+        Optional<ButtonType> result = confirmationAlert.showAndWait();
+        if (result.isPresent() && result.get() == yesButtonType ) {
+            try {
+                articleService.deleteArticle(article.getId_article());
+                blogController.loadArticles();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                // Display an error message or handle the exception as needed
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setTitle("Error");
+                errorAlert.setHeaderText("Deletion Failed");
+                errorAlert.setContentText("An error occurred while deleting the article. Please try again.");
+                errorAlert.showAndWait();
+            }
+        }
     }
 
     public void handleViewMore() throws IOException {

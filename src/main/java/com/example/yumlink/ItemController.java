@@ -50,6 +50,17 @@ public class ItemController {
         numserie.setDisable(false);
         ObservableList<Integer> numbers = FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9);
         numberComboBox.setItems(numbers);
+        Image logoimage = new Image("file:" + "C:/Users/horch/Desktop/YumLink/src/main/java/com/example/yumlink/chariot.png");
+
+//
+//
+//// Create an ImageView with the icon/image
+        ImageView iconImageView = new ImageView(logoimage);
+        double iconWidth = 40; // Set the desired width
+        double iconHeight = 40; // Set the desired height
+        iconImageView.setFitWidth(iconWidth);
+        iconImageView.setFitHeight(iconHeight);
+        addP.setGraphic(iconImageView);
 
 
     }

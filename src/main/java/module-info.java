@@ -14,6 +14,8 @@ module com.example.yumlink {
     requires java.sql;
     requires java.desktop;
 
+    requires java.mail;
+
     opens com.example.yumlink to javafx.fxml;
     exports com.example.yumlink;
 }

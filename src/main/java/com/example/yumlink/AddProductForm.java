@@ -62,9 +62,14 @@ public class AddProductForm {
     public TableView partsTable;
 
     @FXML
-    public Button addProductSaveButton;
+    public Button addp;
     @FXML
-    public Button addProductRemoveAssociatedPartButton;
+    public Button remove;
+
+    @FXML
+    public Button update;
+    @FXML
+    public Button export;
     @FXML
     private Button btntosop;
 
@@ -79,25 +84,7 @@ public class AddProductForm {
         this.baseController = baseController;
     }
 
-    /***
-     * @param actionEvent
-     * Function: Allows for addition of product to productTable.
-     * Parses entry from textfield to the appropriate data type.
-     *
-     * Produces error if no product name entered.
-     * Produces error if inventory parameters are invalid.
-     * Produces error if other textfields left blank or with invalid
-     * data types/entry.
-     *
-     * If product successfully added, navigates user back to home screen.
-     *
-     * RUNTIME ERROR
-     * Logic error: stipulated that productstock >= productMax rather than <= productMax.
-     * Would kick back error print in console.
-     * @throws IOException
-     * FUTURE ENHANCEMENT
-     * Figure out how to auto increment id
-     */
+
     public void addProductSaveClick(ActionEvent actionEvent) {
         try {
             String productName = nomp.getText();
@@ -133,11 +120,20 @@ public class AddProductForm {
                 productAdded = true;
 
                 if (productAdded) {
-                    Parent root = FXMLLoader.load(getClass().getResource("AddProductForm.fxml"));
-                    Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-                    stage.setTitle("shop Screen");
-                    stage.setScene(new Scene(root));
-                    stage.show();
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddProductForm.fxml"));
+                        Parent shopPage = loader.load();
+                        AddProductForm addProductForm = loader.getController();
+                        addProductForm.setBaseController(baseController);
+                        baseController.getView_content().getChildren().setAll(shopPage);
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Success");
+                        alert.setHeaderText("Add successfully  ");
+                        alert.setContentText("good.");
+                        alert.showAndWait();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         } catch (NumberFormatException e) {
@@ -146,8 +142,6 @@ public class AddProductForm {
             alert.setHeaderText("Unable to add product.");
             alert.setContentText("Please enter valid numeric values for price and try again.");
             alert.showAndWait();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -188,6 +182,36 @@ public class AddProductForm {
     public void initialize() {
 
         idonlyread.setEditable(false);
+
+        Image iconImage = new Image(new File("C:/Users/horch/Desktop/YumLink/src/main/java/com/example/yumlink/plus.png").toURI().toString());
+        Image iconImage1= new Image(new File("C:/Users/horch/Desktop/YumLink/src/main/java/com/example/yumlink/mettre-a-jour.png").toURI().toString());
+        Image iconImage2= new Image(new File("C:/Users/horch/Desktop/YumLink/src/main/java/com/example/yumlink/supprimer.png").toURI().toString());
+        Image logoimage = new Image("file:" + "C:/Users/horch/Desktop/YumLink/src/main/java/com/example/yumlink/exporter.png");
+
+//
+//
+//// Create an ImageView with the icon/image
+        ImageView iconImageView = new ImageView(iconImage);
+        ImageView iconImageView1 = new ImageView(iconImage1);
+        ImageView iconImageView2 = new ImageView(iconImage2);
+        ImageView iconImageView3 = new ImageView(logoimage);
+//        // Set the fit width and fit height to resize the icon
+        double iconWidth = 40; // Set the desired width
+        double iconHeight = 40; // Set the desired height
+        iconImageView.setFitWidth(iconWidth);
+        iconImageView.setFitHeight(iconHeight);
+        iconImageView1.setFitWidth(iconWidth);
+        iconImageView1.setFitHeight(iconHeight);
+      iconImageView2.setFitWidth(iconWidth);
+       iconImageView2.setFitHeight(iconHeight);
+        iconImageView3.setFitWidth(iconWidth);
+        iconImageView3.setFitHeight(iconHeight);
+
+// Set the graphic content of the button to the ImageView
+        addp.setGraphic(iconImageView);
+        update.setGraphic(iconImageView1);
+        remove.setGraphic(iconImageView2);
+        export.setGraphic(iconImageView3);
         try {
             // Assuming you have a method to get the database connection
             Connection con = database.getInstance().getConn();
@@ -308,63 +332,102 @@ public class AddProductForm {
         double productPrice = Double.parseDouble(productPriceTxt.getText());
         String description = descp.getText();
         int idp = Integer.parseInt(idonlyread.getText());
-        try {
-            Connection con = database.getInstance().getConn();
-            // Assuming you have an appropriate UPDATE SQL statement
-            String updateSQL = "UPDATE produit SET nom=?, prix=?, diescription=?, image=? WHERE id=?";
-            try (PreparedStatement st = con.prepareStatement(updateSQL)) {
-                // Set the updated values
-                st.setString(1, productName);
-                st.setDouble(2, productPrice);
-                st.setString(3, description);
-                st.setString(4, image);
-                st.setInt(5, idp);
 
-                // Execute the update statement
-                st.executeUpdate();
+        // Show a confirmation dialog
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationAlert.setTitle("Confirmation");
+        confirmationAlert.setHeaderText("Update Product");
+        confirmationAlert.setContentText("Are you sure you want to update this product?");
 
+        Optional<ButtonType> result = confirmationAlert.showAndWait();
 
-                Parent root = FXMLLoader.load(getClass().getResource("AddProductForm.fxml"));
-                Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-                stage.setTitle("admin Screen");
-                stage.setScene(new Scene(root));
-                stage.show();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+        // Check if the user clicked OK in the confirmation dialog
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                Connection con = database.getInstance().getConn();
+                // Assuming you have an appropriate UPDATE SQL statement
+                String updateSQL = "UPDATE produit SET nom=?, prix=?, diescription=?, image=? WHERE id=?";
+                try (PreparedStatement st = con.prepareStatement(updateSQL)) {
+                    // Set the updated values
+                    st.setString(1, productName);
+                    st.setDouble(2, productPrice);
+                    st.setString(3, description);
+                    st.setString(4, image);
+                    st.setInt(5, idp);
+
+                    // Execute the update statement
+                    st.executeUpdate();
+
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddProductForm.fxml"));
+                        Parent shopPage = loader.load();
+                        AddProductForm addProductForm = loader.getController();
+                        addProductForm.setBaseController(baseController);
+                        baseController.getView_content().getChildren().setAll(shopPage);
+
+                        Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                        successAlert.setTitle("Success");
+                        successAlert.setHeaderText("Update successful");
+                        successAlert.setContentText("Product updated successfully.");
+                        successAlert.showAndWait();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                // Handle SQLException appropriately
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Handle SQLException appropriately
         }
-
-
     }
+
 
     @FXML
     void removeproduit(ActionEvent event) {
         int idp = Integer.parseInt(idonlyread.getText());
-        try {
-            Connection con = database.getInstance().getConn();
-            // Assuming you have an appropriate DELETE SQL statement
-            String deleteSQL = "DELETE FROM produit WHERE id=?";
-            try (PreparedStatement st = con.prepareStatement(deleteSQL)) {
-                st.setInt(1, idp);  // Set the correct parameter index (1, not 5)
-                st.executeUpdate();
-                Parent root = FXMLLoader.load(getClass().getResource("AddProductForm.fxml"));
-                Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-                stage.setTitle("admin Screen");
-                stage.setScene(new Scene(root));
-                stage.show();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Handle SQLException appropriately
-        }
-        partsTable.refresh();
 
+        // Show a confirmation dialog
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationAlert.setTitle("Confirmation");
+        confirmationAlert.setHeaderText("Remove Product");
+        confirmationAlert.setContentText("Are you sure you want to remove this product?");
+
+        Optional<ButtonType> result = confirmationAlert.showAndWait();
+
+        // Check if the user clicked OK in the confirmation dialog
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                Connection con = database.getInstance().getConn();
+                // Assuming you have an appropriate DELETE SQL statement
+                String deleteSQL = "DELETE FROM produit WHERE id=?";
+                try (PreparedStatement st = con.prepareStatement(deleteSQL)) {
+                    st.setInt(1, idp);  // Set the correct parameter index (1, not 5)
+                    st.executeUpdate();
+
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddProductForm.fxml"));
+                        Parent shopPage = loader.load();
+                        AddProductForm addProductForm = loader.getController();
+                        addProductForm.setBaseController(baseController);
+                        baseController.getView_content().getChildren().setAll(shopPage);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                    successAlert.setTitle("Success");
+                    successAlert.setHeaderText("Remove successful");
+                    successAlert.setContentText("Product removed successfully.");
+                    successAlert.showAndWait();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                // Handle SQLException appropriately
+            }
+            partsTable.refresh();
+        }
     }
+
     @FXML
     void toshop(ActionEvent event) throws IOException {
 

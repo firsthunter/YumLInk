@@ -24,7 +24,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class pancomController {
+public class pancomController  {
 
     @FXML
     private Button butd;
@@ -42,6 +42,21 @@ public class pancomController {
     private TextField quantite;
     @FXML
     private TextField idonlyread;
+    BaseController baseController;
+    private float prixTT;
+
+    public void setBaseController(BaseController baseController) {
+        this.baseController = baseController;
+    }
+
+    @FXML
+    private TextField priXTotal;
+    public void setPrixTTValue(float prixTT) {
+        priXTotal.setText(String.valueOf(prixTT));
+    }
+
+
+
 
     @FXML
     private void initialize() {
@@ -54,6 +69,8 @@ public class pancomController {
         iconImageView.setFitWidth(iconWidth);
         iconImageView.setFitHeight(iconHeight);
         butd.setGraphic(iconImageView);
+
+
     }
 
     public void setData(produit p) throws SQLException {
@@ -81,8 +98,10 @@ public class pancomController {
                 panier ppp = new panier(idp, quantite, prixT, id_produit, id_client);
                 paniertList.add(ppp);
             }
+
             for (panier pp : paniertList) {
                 if(p.getId()==pp.getId_prduit()) {
+                    prixTT=prixTT+pp.getPrixtotal();
                     quantite.setText(String.valueOf(pp.getQuantite()));
                     name.setText(p.getNom());
                     prix.setText(String.valueOf(pp.getPrixtotal()));
@@ -92,6 +111,8 @@ public class pancomController {
                     pimage.setImage(image);
                 }
             }
+            System.out.println(prixTT);
+
         }
     }
 
@@ -117,11 +138,12 @@ public class pancomController {
 
             // Load the updated UI (if necessary)
             try {
-                Parent root = FXMLLoader.load(getClass().getResource("panier.fxml"));
-                Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-                stage.setTitle("admin Screen");
-                stage.setScene(new Scene(root));
-                stage.show();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("panier.fxml"));
+                Parent shopPage = loader.load();
+                panierController panierController = loader.getController();
+
+                panierController.setBaseController(baseController);
+                baseController.getView_content().getChildren().setAll(shopPage);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

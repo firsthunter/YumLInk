@@ -24,17 +24,17 @@
                   <ImageView fx:id="pimage" fitHeight="150.0" fitWidth="192.0" pickOnBounds="true" preserveRatio="true" />
                      <VBox alignment="CENTER" prefHeight="150.0" prefWidth="77.0">
                         <children>
-                        <TextField fx:id="name" prefHeight="55.0" prefWidth="100.0" text="name" />
+                        <TextField fx:id="name" editable="false" prefHeight="55.0" prefWidth="100.0" text="name" />
                         </children>
                      </VBox>
                      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                         <children>
-                        <TextField fx:id="quantite" prefHeight="54.0" prefWidth="100.0" text="quantite" />
+                        <TextField fx:id="quantite" editable="false" prefHeight="54.0" prefWidth="100.0" text="quantite" />
                         </children>
                      </VBox>
                      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                         <children>
-                        <TextField fx:id="prix" prefHeight="56.0" prefWidth="100.0" text="prix" />
+                        <TextField fx:id="prix" editable="false" prefHeight="56.0" prefWidth="100.0" text="prix" />
                         </children>
                      </VBox>
                </children>

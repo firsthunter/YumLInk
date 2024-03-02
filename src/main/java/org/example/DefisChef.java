@@ -17,7 +17,7 @@ import services.DéfisS;
 
 import java.io.File;
 import java.sql.SQLException;
-import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class DefisChef {
     @FXML
@@ -45,32 +45,40 @@ public class DefisChef {
     }
 
     @FXML
-    public void ajouter(javafx.event.ActionEvent actionEvent) {
+    public void ajouter(javafx.event.ActionEvent actionEvent) throws SQLException {
         if (name.getText().isEmpty() || description.getText().isEmpty() || date.getValue() == null || heure.getLocalTime() == null || imagePath.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Veuillez remplir tous les champs et sélectionner une image.");
             alert.show();
             return; // Exit method if any field is empty
         }
-        // Check if the date format is yyyy-MM-dd
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        if (!isNameUnique(name.getText())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Le nom du défi doit être unique.");
+            alert.show();
+
+            return;
+
+        }
+
+       /* DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String formattedDate = date.getValue().format(dateFormatter);
         if (!date.toString().equals(formattedDate)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Veuillez entrer l'heure au format  yyyy-MM-dd.");
+            alert.setContentText("Veuillez entrer la date au format  yyyy-MM-dd.");
             alert.show();
             return; // Exit method if date format is incorrect
         }
 
         // Check if the time format is HH:mm:ss
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         String formattedTime = heure.getLocalTime().format(timeFormatter);
         if (!heure.toString().equals(formattedTime)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Veuillez entrer l'heure au format HH:mm:ss.");
             alert.show();
             return; // Exit method if time format is incorrect
-        }
+        }*/
         User user = new User(6);
         Défis defis = new Défis(name.getText(),imagePath,description.getText(),date.getValue(),heure.getLocalTime(),user);
         DéfisS defisS = new DéfisS();
@@ -86,6 +94,17 @@ public class DefisChef {
         stage.close();
        afficher.refreshView();
 
+    }
+
+    private boolean isNameUnique(String text) throws SQLException {
+        DéfisS défisS = new DéfisS();
+        List<Défis> défisList = défisS.afficher();
+        for (Défis défis : défisList) {
+            if (défis.getNom_d().equalsIgnoreCase(name.getText())) {
+                return false; // Name is not unique
+            }
+        }
+        return true; // Name is unique
     }
 
 

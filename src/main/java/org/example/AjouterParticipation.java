@@ -57,8 +57,8 @@ public class AjouterParticipation {
             return; // Exit method if any field is empty
         }
         User user = new User(5);
-        System.out.println(d.getId_d());
-        Participant par = new Participant(imagePart,user,d);
+         int vote =0;
+        Participant par = new Participant(imagePart,user,d,vote);
         ParticipantS parS = new ParticipantS();
         try {
             parS.ajouterP(par);

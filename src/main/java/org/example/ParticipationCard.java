@@ -23,6 +23,9 @@ public class ParticipationCard {
     private Label idPartt;
 
     @FXML
+    private Button vote;
+
+    @FXML
     private ImageView imagePart;
 
     @FXML
@@ -75,5 +78,24 @@ public class ParticipationCard {
             e.printStackTrace();
             // Handle delete error
         }
+    }
+    @FXML
+    public void voter(ActionEvent event) {
+
+        try {
+            // Increment the vote count in the database
+            ParticipantS PS = new ParticipantS();
+            PS.incrementVote(participant.getIdpart());
+
+            // Update the label
+            int newVoteCount = participant.getVote() + 1;
+            participant.setVote(newVoteCount);
+            votee.setText(Integer.toString(newVoteCount));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle database update error
+        }
+
     }
 }

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="270.0" prefWidth="220.0" style="-fx-background-color: #D4ECE2; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.DefisCardChef">
+<AnchorPane prefHeight="270.0" prefWidth="220.0" style="-fx-background-color: #F7E6C2; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.DefisCardChef">
    <children>
       <Label layoutX="14.0" layoutY="8.0" text="Nom:">
          <font>
@@ -33,11 +33,11 @@
          </font></Label>
       <Label fx:id="DateC" layoutX="98.0" layoutY="155.0" prefHeight="18.0" prefWidth="113.0" />
       <Label fx:id="HeureC" layoutX="85.0" layoutY="179.0" prefHeight="18.0" prefWidth="84.0" />
-      <Button fx:id="sup" layoutX="18.0" layoutY="231.0" mnemonicParsing="false" onAction="#supp" style="-fx-background-color: #237C55; -fx-background-radius: 20;" text="supprimer">
+      <Button fx:id="sup" layoutX="177.0" layoutY="13.0" mnemonicParsing="false" onAction="#supp" style="-fx-background-color: #74ae4e; -fx-background-radius: 20;" text="X">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="12.0" />
          </font></Button>
-      <Button fx:id="mod" layoutX="130.0" layoutY="231.0" mnemonicParsing="false" onAction="#modi" style="-fx-background-color: #237C55; -fx-background-radius: 20;" text="modifier">
+      <Button fx:id="mod" layoutX="73.0" layoutY="233.0" mnemonicParsing="false" onAction="#modi" style="-fx-background-color: #74ae4e; -fx-background-radius: 20;" text="modifier">
          <font>
             <Font size="14.0" />
          </font></Button>

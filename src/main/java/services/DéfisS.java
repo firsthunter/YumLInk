@@ -60,8 +60,7 @@ public class DéfisS implements IService<Défis>  {
 
 
 
-    @Override
-    public List<Défis> afficher() throws SQLException{
+    @Override    public List<Défis> afficher() throws SQLException{
 
         Statement st = conn.createStatement();
         String req = "SELECT d.* , u.nom , u.prenom , u.idU FROM defis d " +

@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import jfxtras.scene.control.LocalTimeTextField?>
 
-<AnchorPane fx:id="photoB" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #D4ECE2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.DefisChef">
+<AnchorPane fx:id="photoB" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #F7E6C2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.DefisChef">
    <children>
       <Label layoutX="50.0" layoutY="34.0" text="Nom:">
          <font>
@@ -31,7 +31,7 @@
       <TextField fx:id="description" layoutX="204.0" layoutY="200.0" prefHeight="80.0" prefWidth="175.0" />
       <DatePicker fx:id="date" layoutX="208.0" layoutY="297.0" />
       <LocalTimeTextField fx:id="heure" layoutX="208.0" layoutY="344.0" prefHeight="26.0" prefWidth="175.0" />
-      <Button fx:id="ajout" layoutX="457.0" layoutY="337.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="34.0" prefWidth="170.0" style="-fx-background-color: #237C55; -fx-background-radius: 20;" text="Ajouter">
+      <Button fx:id="ajout" layoutX="457.0" layoutY="337.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="34.0" prefWidth="170.0" style="-fx-background-color: #74ae4e; -fx-background-radius: 20;" text="Ajouter">
          <font>
             <Font name="System Bold Italic" size="21.0" />
          </font></Button>
@@ -39,7 +39,7 @@
          <font>
             <Font name="System Bold" size="20.0" />
          </font></Label>
-      <Button fx:id="photooo" layoutX="383.0" layoutY="162.0" mnemonicParsing="false" onAction="#addphoto" style="-fx-background-color: #237C55; -fx-background-radius: 20;" text="insere">
+      <Button fx:id="photooo" layoutX="383.0" layoutY="162.0" mnemonicParsing="false" onAction="#addphoto" style="-fx-background-color: #74ae4e; -fx-background-radius: 20;" text="insere">
          <font>
             <Font size="14.0" />
          </font></Button>

@@ -34,6 +34,12 @@ public class Participant {
         D = d;
     }
 
+    public Participant(String photo_p, User user, Défis d, int vote) {
+        this.photo_p = photo_p;
+        U = user;
+        D = d;
+        this.vote=vote;
+    }
 
 
     @Override

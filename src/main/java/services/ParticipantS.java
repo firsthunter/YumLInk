@@ -20,12 +20,13 @@ public class ParticipantS implements PService<Participant> {
 
     @Override
     public void ajouterP(Participant participant) throws SQLException {
-        String req = "INSERT INTO participant ( photo_p,idU,id_d) " +
-                "VALUES (?, ?, ?)";
+        String req = "INSERT INTO participant ( photo_p,idU,id_d,vote) " +
+                "VALUES (?, ?, ?,?)";
         PreparedStatement preparedStatement = conn.prepareStatement(req);
         preparedStatement.setString(1, participant.getPhoto_p());
         preparedStatement.setInt(2,participant.getU().getIdU());
         preparedStatement.setInt(3,participant.getD().getId_d());
+        preparedStatement.setInt(4,participant.getVote());
         preparedStatement.executeUpdate();
     }
   /*  @Override
@@ -71,4 +72,17 @@ public class ParticipantS implements PService<Participant> {
         }
         return par;
     }
-}
+
+    public void incrementVote(int idpart)  throws  SQLException{
+
+        String sql = "UPDATE participant SET vote = vote + 1 WHERE idpart = ?";
+
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setInt(1, idpart);
+            statement.executeUpdate();
+        }
+    }
+
+
+    }
+

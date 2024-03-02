@@ -35,7 +35,7 @@ public class DefisCardUser {
     @FXML
     private ImageView PhotoUser;
     private Défis d;
-    private AfficherDefis afficher;
+    private DefisUser afficher;
 
     public void setd(Défis d) {
         this.d = d;
@@ -79,5 +79,8 @@ public class DefisCardUser {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }}
+    }
+
+
+}
 

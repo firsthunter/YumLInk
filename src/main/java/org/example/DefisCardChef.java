@@ -17,7 +17,8 @@ import services.DéfisS;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
-
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class DefisCardChef {
 
@@ -39,7 +40,10 @@ public class DefisCardChef {
     private Label Owner;
     private Défis d;
     private AfficherDefis afficher;
-
+    private ScheduledExecutorService scheduler;
+    public DefisCardChef() {
+        this.scheduler = Executors.newScheduledThreadPool(1);
+    }
     public void setD(Défis d) {
         this.d = d;
     }
@@ -129,6 +133,8 @@ public class DefisCardChef {
     public void setRefresh(AfficherDefis afficher) {
         this.afficher = afficher;
     }
+
+
 
 
 }

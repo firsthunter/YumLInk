@@ -1,10 +1,11 @@
 package services;
 
-import entities.*;
-
+import entities.Défis;
+import entities.User;
 import utils.MyDB;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +82,38 @@ public class DéfisS implements IService<Défis>  {
         }
         return def;
 
+    }
+    public void deleteExpiredDefis(LocalDateTime currentDateTime) throws SQLException {
+        // SQL query to delete expired Défis from the database
+        String sql = "DELETE FROM defis WHERE delai < ? OR (delai = ? AND heure < ?)";
+
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setObject(1, currentDateTime.toLocalDate());
+            statement.setObject(2, currentDateTime.toLocalDate());
+            statement.setObject(3, currentDateTime.toLocalTime());
+
+            // Debugging: Print out the SQL query being executed
+            System.out.println("Executing SQL query: " + statement.toString());
+
+            int rowsAffected = statement.executeUpdate();
+            System.out.println("Rows affected by deletion: " + rowsAffected);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle SQL exception
+        }
+    }
+    public List<Défis> getNonExpiredDefis(LocalDateTime currentDateTime) throws SQLException {
+        List<Défis> allDefis = afficher();
+        List<Défis> nonExpiredDefis = new ArrayList<>();
+
+        for (Défis defis : allDefis) {
+            LocalDateTime defisDateTime = LocalDateTime.of(defis.getDelai(), defis.getHeure());
+            if (!defisDateTime.isBefore(currentDateTime)) {
+                nonExpiredDefis.add(defis);
+            }
+        }
+
+        return nonExpiredDefis;
     }
     }
 

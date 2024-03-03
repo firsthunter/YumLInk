@@ -13,6 +13,7 @@ import services.DéfisS;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -82,9 +83,13 @@ public class AfficherDefis {
     }
 
     private void loadContent() {
-        try {// Fetch the list of Défis from the database
-            DéfisS DS= new DéfisS();
-            List<Défis> défisList = DS.afficher();
+        try {
+            DéfisS DS = new DéfisS();
+            LocalDateTime currentDateTime = LocalDateTime.now();
+
+            // Fetch only non-expired Défis
+            List<Défis> défisList = DS.getNonExpiredDefis(currentDateTime);
+
             // Sort the list by date using Comparator
             Collections.sort(défisList, Comparator.comparing(Défis::getDelai));
 
@@ -98,8 +103,7 @@ public class AfficherDefis {
             for (Défis défis : défisList) {
                 col++;
                 // Load item.fxml for each Défis and set its data
-                FXMLLoader Loader;
-                Loader = new FXMLLoader(getClass().getResource("/DefisCardChef.fxml"));
+                FXMLLoader Loader = new FXMLLoader(getClass().getResource("/DefisCardChef.fxml"));
                 Parent interfaceRoot = Loader.load();
                 DefisCardChef itemController = Loader.getController();
                 itemController.setData(défis);
@@ -121,6 +125,7 @@ public class AfficherDefis {
             e.printStackTrace();
             // Handle exceptions appropriately
         }
+
     }
 
     public void refreshView() {

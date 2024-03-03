@@ -17,6 +17,7 @@ import services.DéfisS;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 public class DefisChef {
@@ -43,6 +44,20 @@ public class DefisChef {
     public void setAfficher(AfficherDefis afficher) {
         this.afficher = afficher;
     }
+    @FXML
+    private void initialize() {
+        // Add a listener to the DatePicker's value property
+        date.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null && newValue.isBefore(LocalDate.now())) {
+                // If the selected date is before the current date, display an error message
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("La date doit être après la date actuelle.");
+                alert.show();
+                // Reset the DatePicker value to null
+                date.setValue(null);
+            }
+        });
+    }
 
     @FXML
     public void ajouter(javafx.event.ActionEvent actionEvent) throws SQLException {
@@ -60,6 +75,7 @@ public class DefisChef {
             return;
 
         }
+
 
        /* DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String formattedDate = date.getValue().format(dateFormatter);

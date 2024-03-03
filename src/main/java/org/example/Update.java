@@ -46,6 +46,25 @@ public class Update {
         this.afficher = afficher;
         populateFields();
     }
+    @FXML
+    private void initialize() {
+        // Add a listener to the textProperty of the TextField
+        DateU.textProperty().addListener((observable, oldValue, newValue) -> {
+
+
+                    LocalDate selectedDate = LocalDate.parse(newValue); // Parse the text to a LocalDate object
+                    if (selectedDate.isBefore(LocalDate.now())) {
+                        // If the selected date is before the current date, display an error message
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setContentText("La date doit être après la date actuelle.");
+                        alert.show();
+                        // Clear the TextField
+                        DateU.clear();
+                    }
+
+
+        });
+    }
 
     private void populateFields() {
         NomU.setText(défis.getNom_d());
@@ -88,13 +107,13 @@ public class Update {
 
     @FXML
     void Update(ActionEvent event) {
-        if (NomU.getText().isEmpty() || DisU.getText().isEmpty() || DateU.getText() == null || HeureU.getText() == null || imageP.isEmpty()) {
+      /*  if (NomU.getText().isEmpty() || DisU.getText().isEmpty() || DateU.getText() == null || HeureU.getText() == null || imageP.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Veuillez remplir tous les champs et sélectionner une image, puis entrer la date " +
                     "au format AAAA-MM-JJ et l'heure au format HH:mm:ss.");
             alert.show();
             return; // Exit method if any field is empty
-        }
+        }*/
 
 
         if (défis != null) {
@@ -126,7 +145,7 @@ public class Update {
 
             } catch (SQLException e) {
                 e.printStackTrace();
-                // Handle update error
+
             }
         }
     }

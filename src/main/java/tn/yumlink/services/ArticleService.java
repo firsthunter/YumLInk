@@ -95,6 +95,27 @@ public class ArticleService implements IServiceArticle<Article> {
     }
 
     @Override
+    public List<User> fetchAuthors(){
+        List<User> author_chefs = new ArrayList<>();
+        String query = "SELECT DISTINCT a.idU, u.idU AS user_id, u.nom AS user_nom, u.prenom AS user_prenom " +
+                "FROM article a " +
+                "INNER JOIN user u ON a.idU = u.idU";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    User chef = new User(resultSet.getInt("user_id"),
+                            resultSet.getString("user_nom"),
+                            resultSet.getString("user_prenom"));
+                    author_chefs.add(chef);
+                }
+            }
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return author_chefs;
+    }
+
+    @Override
     public List<Article> fetchArticlesByTags(List<String> tags) {
         List<Article> articles = new ArrayList<>();
         String query = "SELECT a.*, u.idU AS user_id, u.nom AS nom_user, u.prenom AS prenom_user " +

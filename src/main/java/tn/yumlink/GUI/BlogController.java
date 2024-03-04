@@ -11,8 +11,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import org.controlsfx.control.CheckComboBox;
+import org.controlsfx.control.SearchableComboBox;
 import tn.yumlink.models.Article;
 import tn.yumlink.models.Tag;
+import tn.yumlink.models.User;
 import tn.yumlink.services.ArticleService;
 
 import java.io.IOException;
@@ -38,11 +40,13 @@ public class BlogController implements Initializable {
     Pagination pagination = new Pagination();
     @FXML
     CheckComboBox<Tag> tagCheckComboBox = new CheckComboBox<>();
+    @FXML
+    private SearchableComboBox<User> chefSearchComboBox;
     ArticleService articleService = new ArticleService();
     private List<Article> articles;
+    private List<Tag> availableTags = new ArrayList<>();
+    private List<User> author_chefs = new ArrayList<>();
     Article ArticleToUpdate = new Article();
-    List<Tag> availableTags = new ArrayList<>();
-
     private BaseController baseController;
 
     public void setBaseController(BaseController baseController) {
@@ -52,7 +56,9 @@ public class BlogController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         articles = articleService.fetchArticles();
+        author_chefs = articleService.fetchAuthors();
         availableTags = articleService.fetchTags();
+        chefSearchComboBox.getItems().addAll(author_chefs);
         tagCheckComboBox.getItems().addAll(availableTags);
         update_form.visibleProperty().set(false);
         update_post_btn.visibleProperty().set(false);

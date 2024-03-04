@@ -86,4 +86,9 @@ public class User {
     public void setAdresse(String adresse) {
         this.adresse = adresse;
     }
+
+    @Override
+    public String toString() {
+        return nom + " " + prenom;
+    }
 }

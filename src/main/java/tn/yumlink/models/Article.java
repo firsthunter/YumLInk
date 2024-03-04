@@ -1,5 +1,7 @@
 package tn.yumlink.models;
 
+import org.json.JSONObject;
+
 import java.time.LocalDateTime;
 
 public class Article {
@@ -10,11 +12,12 @@ public class Article {
     private String description_article;
     private int nb_likes_article;
     private LocalDateTime date_published;
+    private JSONObject tags;
 
     public Article() {
     }
 
-    public Article(int id_article, User user, String title_article, String img_article, String description_article, int nb_likes_article, LocalDateTime date_published) {
+    public Article(int id_article, User user, String title_article, String img_article, String description_article, int nb_likes_article, LocalDateTime date_published, JSONObject tags) {
         this.id_article = id_article;
         this.user = user;
         this.title_article = title_article;
@@ -22,6 +25,7 @@ public class Article {
         this.description_article = description_article;
         this.nb_likes_article = nb_likes_article;
         this.date_published = date_published;
+        this.tags = tags;
     }
 
     public int getId_article() {
@@ -78,6 +82,14 @@ public class Article {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public JSONObject getTags() {
+        return tags;
+    }
+
+    public void setTags(JSONObject tags) {
+        this.tags = tags;
     }
 }
 

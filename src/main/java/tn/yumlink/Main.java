@@ -1,7 +1,9 @@
 package tn.yumlink;
 
+import tn.yumlink.services.ArticleService;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        ArticleService articleService = new ArticleService();
     }
 }

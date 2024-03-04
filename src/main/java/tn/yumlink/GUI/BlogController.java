@@ -1,26 +1,24 @@
 package tn.yumlink.GUI;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.util.Callback;
+import org.controlsfx.control.CheckComboBox;
 import tn.yumlink.models.Article;
+import tn.yumlink.models.Tag;
 import tn.yumlink.services.ArticleService;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -38,9 +36,13 @@ public class BlogController implements Initializable {
 
     @FXML
     Pagination pagination = new Pagination();
+    @FXML
+    CheckComboBox<Tag> tagCheckComboBox = new CheckComboBox<>();
     ArticleService articleService = new ArticleService();
     private List<Article> articles;
     Article ArticleToUpdate = new Article();
+    List<Tag> availableTags = new ArrayList<>();
+
     private BaseController baseController;
 
     public void setBaseController(BaseController baseController) {
@@ -49,25 +51,30 @@ public class BlogController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        articles = articleService.fetchArticles();
+        availableTags = articleService.fetchTags();
+        tagCheckComboBox.getItems().addAll(availableTags);
         update_form.visibleProperty().set(false);
         update_post_btn.visibleProperty().set(false);
         loadArticles();
         update_post_btn.setOnAction(actionEvent -> {
             handleUpdateVbox();
+            availableTags = articleService.fetchTags();
             loadArticles();
             update_form.visibleProperty().set(false);
             update_post_btn.visibleProperty().set(false);
         });
     }
-    private GridPane getPost_grid(int pageIndex){
+
+    private GridPane getPost_grid(int pageIndex) {
         GridPane gridPane = new GridPane();
         int columns = 0;
         int rows = 1;
-        int max = 0;
+        int max;
         int articlesPerPage = 9;
         int page = pageIndex * articlesPerPage;
         if ((page + articlesPerPage) >= articles.size()) {
-             max = articles.size();
+            max = articles.size();
         } else {
             max = page + articlesPerPage;
         }
@@ -86,15 +93,16 @@ public class BlogController implements Initializable {
                     rows++;
                 }
                 gridPane.add(vBox, columns++, rows);
-                GridPane.setMargin(vBox, new Insets(5,4,0,4));
+                GridPane.setMargin(vBox, new Insets(5, 4, 0, 4));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         return gridPane;
     }
-    public void setAdd_post_btn(){
-        try{
+
+    public void setAdd_post_btn() {
+        try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/UI/CreateNewPost.fxml"));
             Parent createNewPost = fxmlLoader.load();
             NewPostController newPostController = fxmlLoader.getController();
@@ -104,22 +112,14 @@ public class BlogController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-    public void loadArticles(){
-        try {
-            articles = articleService.fetchArticles();
-            pagination.setPageCount((int) Math.ceil((double) articles.size() / 9));
-            pagination.setMaxPageIndicatorCount(3);
-            pagination.setPageFactory(new Callback<Integer, Node>() {
-                @Override
-                public Node call(Integer pageIndex) {
-                    return getPost_grid(pageIndex);
-                }
-            });
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+    public void loadArticles() {
+        pagination.setPageCount((int) Math.ceil((double) this.articles.size() / 9));
+        pagination.setMaxPageIndicatorCount(3);
+        pagination.setPageFactory(this::getPost_grid);
     }
-    public void handleUpdateVbox(){
+
+    public void handleUpdateVbox() {
         String Newtitle = title_id_update.getText();
         String NewImg = img_id_update.getText();
         String NewDescription = description_id_update.getText();
@@ -131,5 +131,20 @@ public class BlogController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void handleFilterByTags() {
+        List<Tag> selectedTags = tagCheckComboBox.getCheckModel().getCheckedItems();
+        List<String> selectedTagValues = new ArrayList<>();
+        System.out.println(selectedTags);
+        if (selectedTags.isEmpty()) {
+            this.articles = articleService.fetchArticles();
+        } else {
+            for (Tag tag : selectedTags) {
+                selectedTagValues.add(tag.getTag_value());
+            }
+            this.articles = articleService.fetchArticlesByTags(selectedTagValues);
+        }
+        loadArticles();
     }
 }

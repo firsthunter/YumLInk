@@ -3,6 +3,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.Reflection?>
@@ -12,7 +14,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="526.0" prefWidth="1126.0" styleClass="anchor-pane" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.beta.Controller.UsernutritionPage">
+<AnchorPane prefHeight="530.0" prefWidth="1100.0" styleClass="anchor-pane" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.beta.Controller.UsernutritionPage">
+   <TableView fx:id="recettesTable" layoutX="886.0" layoutY="143.0" prefHeight="398.0" prefWidth="241.0">
+     <columns>
+       <TableColumn fx:id="nomCol" prefWidth="75.0" text="Nom" />
+       <TableColumn fx:id="calorieCol" prefWidth="75.0" text="Calorie" />
+         <TableColumn fx:id="proteinCol" prefWidth="75.0" text="Protein" />
+     </columns>
+   </TableView>
    <ImageView fitHeight="58.0" fitWidth="857.0" layoutX="419.0" layoutY="414.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@image/chv.png" />
@@ -67,7 +76,7 @@
    <Label layoutX="563.0" layoutY="296.0" stylesheets="@css/style.css" text="Proteins" />
    <Label layoutX="661.0" layoutY="371.0" stylesheets="@css/style.css" text="Fats" />
    <Label layoutX="754.0" layoutY="449.0" stylesheets="@css/style.css" text="Carbs" />
-   <Label layoutX="945.0" layoutY="93.0" prefHeight="18.0" prefWidth="82.0" stylesheets="@css/style.css" text="Suggestion" />
+   <Label layoutX="974.0" layoutY="92.0" prefHeight="18.0" prefWidth="65.0" stylesheets="@css/style.css" text="Suggestion" />
    <RadioButton fx:id="actif" layoutX="221.0" layoutY="243.0" mnemonicParsing="false" text="Actif">
       <toggleGroup>
          <ToggleGroup fx:id="activite" />
@@ -106,4 +115,14 @@
          <Image url="@image/chv.png" />
       </image>
    </ImageView>
+   <Button fx:id="pdf_button" layoutX="600.0" layoutY="518.0" mnemonicParsing="false" onAction="#download_pdf" text="PDF" />
+   <Label layoutX="565.0" layoutY="489.0" prefHeight="15.0" prefWidth="138.0" text="votre Bilan de ton core " />
+   <Button fx:id="btn_regime" layoutX="902.0" layoutY="596.0" mnemonicParsing="false" onAction="#get_regime" text="les valeurs du votre plat preferes" />
+   <TextField fx:id="plat_choisie" layoutX="929.0" layoutY="550.0" />
+   <ImageView fx:id="icon_speak" fitHeight="43.0" fitWidth="43.0" layoutX="189.0" layoutY="574.0" onMouseClicked="#on_press_speak" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@image/speaker.png" />
+      </image>
+   </ImageView>
+   <Label layoutX="131.0" layoutY="545.0" text="Check your Nutrition status" />
 </AnchorPane>

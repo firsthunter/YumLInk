@@ -1,15 +1,28 @@
 package com.example.beta.Controller;
 
+import com.example.beta.Models.PDFGenerator;
+import com.example.beta.Models.Recettes;
 import com.example.beta.Models.UserNutrition;
 import com.example.beta.Services.UserNutrition_Service;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.sun.speech.freetts.Voice;
+import com.sun.speech.freetts.VoiceManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
 
 public class UsernutritionPage {
 
@@ -54,6 +67,27 @@ public class UsernutritionPage {
     @FXML
     private Label label_protein;
 
+    @FXML
+    private TextField plat_choisie;
+
+    @FXML
+    private TableView<Recettes> recettesTable;
+
+    @FXML
+    private TableColumn<Recettes, String> nomCol;
+
+    @FXML
+    private TableColumn<Recettes, Integer> calorieCol;
+
+    @FXML
+    private TableColumn<Recettes, Integer> proteinCol;
+
+
+    private RecommendationController recommendationController;
+
+    public void setRecommendationController(RecommendationController recommendationController) {
+        this.recommendationController = recommendationController;
+    }
 
     BaseController baseController;
 
@@ -109,6 +143,14 @@ public class UsernutritionPage {
                 label_carbs.setText(String.format("%.1f", carbs));
                 label_fats.setText(String.format("%.1f", fats));
                 label_protein.setText(String.format("%.1f", protein));
+
+                RecommendationController rc = new RecommendationController();
+
+                // Call the method to get meal recommendation
+                List<Recettes> recettesList = rc.getmealRecommendation((int) calorie);
+
+                // Populate the recettes table
+                populateRecettesTable(recettesList);
 
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -169,8 +211,9 @@ public class UsernutritionPage {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("User nutrition data updated successfully.");
             alert.show();
-        }
-        catch (NumberFormatException e) {
+            //refresh table
+            recettesTable.refresh();
+        } catch (NumberFormatException e) {
             // Handle invalid number format
             System.err.println("Erreur de format de nombre : " + e.getMessage());
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -181,8 +224,9 @@ public class UsernutritionPage {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText(e.getMessage());
             alert.show();
-        };
-}
+        }
+        ;
+    }
 
     @FXML
     void Affiche_donnee_user(ActionEvent event) {
@@ -214,7 +258,7 @@ public class UsernutritionPage {
                     lazy.setSelected(true);
                     break;
             }
-         } else {
+        } else {
             // Handle case when no user nutrition data is found
             System.out.println("User nutrition data not found for ID: " + userId);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -223,6 +267,183 @@ public class UsernutritionPage {
         }
     }
 
+    @FXML
+    void download_pdf(ActionEvent event) {
+        int age = Integer.parseInt(tf_age.getText().trim());
+        double weight = Double.parseDouble(tf_poids.getText().trim());
+        double height = Double.parseDouble(tf_taille.getText().trim());
+        String gender = Femme.isSelected() ? "Femme" : Homme.isSelected() ? "Homme" : "";
+        String activityLevel = actif.isSelected() ? "Active" : lazy.isSelected() ? "Lazy" : "";
+        String calorie = label_calorie.getText();
+        String fats = label_fats.getText();
+        String carbs = label_carbs.getText();
+
+        Map<String, Double> vitamins = new HashMap<>();
+        vitamins.put("Vitamin A", 100.0);
+        vitamins.put("Vitamin B1", 50.0);
+        vitamins.put("Vitamin B2", 60.0);
+        vitamins.put("Vitamin B3", 70.0);
+        vitamins.put("Vitamin B5", 80.0);
+        vitamins.put("Vitamin B6", 90.0);
+        vitamins.put("Vitamin B7", 100.0);
+        vitamins.put("Vitamin B9", 110.0);
+        vitamins.put("Vitamin B12", 120.0);
+        vitamins.put("Vitamin C", 130.0);
+        vitamins.put("Vitamin D", 140.0);
+        vitamins.put("Vitamin E", 150.0);
+        vitamins.put("Vitamin K", 160.0);
+        vitamins.put("Calcium", 170.0);
+        vitamins.put("Iron", 180.0);
+        vitamins.put("Magnesium", 190.0);
+        vitamins.put("Phosphorus", 200.0);
+        vitamins.put("Potassium", 210.0);
+        vitamins.put("Sodium", 220.0);
+        vitamins.put("Zinc", 230.0);
+        vitamins.put("Copper", 240.0);
+        vitamins.put("Manganese", 250.0);
+        vitamins.put("Selenium", 260.0);
+        vitamins.put("Choline", 270.0);
+        vitamins.put("Biotin", 280.0);
+        vitamins.put("Pantothenic Acid", 290.0);
+        vitamins.put("Riboflavin", 300.0);
+        vitamins.put("Thiamine", 310.0);
+        vitamins.put("Niacin", 320.0);
+        try {
+            PDFGenerator pdfGenerator = new PDFGenerator();
+            pdfGenerator.createPDF(age, (int) weight, (int) height, gender, activityLevel, calorie, fats, carbs, vitamins);
+            System.out.println("PDF generated successfully.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public void populateRecettesTable(List<Recettes> x) {
+        ObservableList<Recettes> observableRecettesList = FXCollections.observableArrayList();
+
+        // Add all Recettes objects from the recettesList to the ObservableList
+        observableRecettesList.addAll(x);
+
+        // Set the items of the recettesTable to the ObservableList
+        recettesTable.setItems(observableRecettesList);
+
+        // Set cell value factories for each column
+        nomCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        calorieCol.setCellValueFactory(new PropertyValueFactory<>("calorie"));
+        proteinCol.setCellValueFactory(new PropertyValueFactory<>("protein"));
+
+
+    }
+
+    @FXML
+    void get_regime(ActionEvent event) {
+        String pc = plat_choisie.getText();
+        if (!pc.isEmpty()) {
+            try {
+                URL url = new URL("https://api.edamam.com/api/nutrition-details?app_id=58aea65e&app_key=8857ecdc438404779d04b57881f1a456");
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setDoOutput(true);
+
+                // Construct the request body
+                String requestBody = "{\"title\": \"Recipe Title\",\"ingr\": [\"" + pc + "\"]}";
+
+                // Send the request body
+                try (OutputStream os = connection.getOutputStream();
+                     OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8")) {
+                    osw.write(requestBody);
+                    osw.flush();
+                }
+
+                // Get the response
+                StringBuilder response = new StringBuilder();
+                try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        response.append(line);
+                    }
+                }
+
+                Gson gson = new Gson();
+                JsonObject jsonResponse = gson.fromJson(response.toString(), JsonObject.class);
+
+                // Extract the nutrient values
+                JsonObject totalNutrients = jsonResponse.getAsJsonObject("totalNutrients");
+                double calories = totalNutrients.getAsJsonObject("ENERC_KCAL").get("quantity").getAsDouble();
+                double protein = totalNutrients.getAsJsonObject("PROCNT").get("quantity").getAsDouble();
+                double fats = totalNutrients.getAsJsonObject("FAT").get("quantity").getAsDouble();
+                double carbs = totalNutrients.getAsJsonObject("CHOCDF").get("quantity").getAsDouble();
+
+                // Construct the alert message with the extracted nutrient values
+                String alertMessage = "Calories: " + calories + " kcal\n" +
+                        "Protein: " + protein + " g\n" +
+                        "Fats: " + fats + " g\n" +
+                        "Carbs: " + carbs + " g";
+
+                // Show the alert
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Nutrient Analysis");
+                alert.setHeaderText("Nutrient Values");
+                alert.setContentText(alertMessage);
+                alert.showAndWait();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Display error message to user
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setTitle("Error");
+                errorAlert.setHeaderText("Unable to Analyze Recipe");
+                errorAlert.setContentText("Error: Unable to analyze recipe. Please try again later.");
+                errorAlert.showAndWait();
+            }
+        } else {
+            // Prompt user to enter recipe
+            Alert inputAlert = new Alert(Alert.AlertType.WARNING);
+            inputAlert.setTitle("Warning");
+            inputAlert.setHeaderText("Empty Recipe");
+            inputAlert.setContentText("Please enter a recipe to analyze.");
+            inputAlert.showAndWait();
+        }
+    }
+
+    @FXML
+    void on_press_speak(MouseEvent event) {
+        String weightStr = tf_poids.getText(); // Assuming 'tf_poids' is the TextField containing the weight as a string
+
+        try {
+            double weight = Double.parseDouble(weightStr);
+
+            // Set up the voice
+            System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
+            VoiceManager voiceManager = VoiceManager.getInstance();
+            Voice voice = voiceManager.getVoice("kevin16");
+            if (voice == null) {
+                System.err.println("Cannot find a voice named kevin16. Please check your configuration.");
+                return;
+            }
+            voice.allocate();
+
+            // Speak the appropriate message based on weight
+            if (weight > 85) {
+                voice.speak("You are overweight.");
+            } else if (weight < 55) {
+                voice.speak("You need to eat more.");
+            } else {
+                voice.speak("You are normal.");
+            }
+
+            // Deallocate the voice resources
+            voice.deallocate();
+
+        } catch (NumberFormatException e) {
+            // Handle the case where the text in the TextField is not a valid number
+            System.err.println("Invalid weight input: " + weightStr);
+        }
+
+
+    }
 }
 
 

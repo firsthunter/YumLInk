@@ -1,8 +1,11 @@
 package com.example.beta.Services;
 
+import com.example.beta.Controller.RecommendationController;
 import com.example.beta.Models.UserNutrition;
 import com.example.beta.Utils.My_db;
+import org.w3c.dom.Document;
 
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -171,5 +174,6 @@ public class UserNutrition_Service implements iService<UserNutrition> {
 
         return null ;
 }
+
 
 }
